@@ -46,7 +46,7 @@ function Home() {
                 
                 {/* Rating Component */}
                 <div className="mb-4">
-                  <Rating rating={product.rating} numReviews={product.numReviews} />
+                  <Rating rating={product.rating} numReviews={product.numreviews} />
                 </div>
                 
                 <div className="flex items-center justify-between">

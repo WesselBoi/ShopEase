@@ -19,7 +19,7 @@ const products = [
         brand: "Samsung",
         category: "Electronics",
         price: 799,
-        countinstock: 18,
+        countinstock: 0,
         rating: 4.6,
         numreviews: 92
     },

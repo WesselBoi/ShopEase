@@ -1,0 +1,120 @@
+import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react"
+import products from "../products"
+import Rating from "../components/Rating"
+import { Link } from "react-router-dom"
+
+function ProductDetails() {
+    const { id } = useParams()
+    const [quantity, setQuantity] = useState(1)
+    
+    const product = products.find(product => product._id === id)
+    
+    // Scroll to top when component mounts
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
+    if (!product) {
+        return (
+            <div className="min-h-screen py-12 px-4 text-center bg-[#7965C1]">
+                <div className="text-white text-xl">Product not found</div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="min-h-screen py-12 px-4 bg-[#7965C1]">
+            <div className="max-w-6xl mx-auto">
+                {/* Back Button */}
+                <div className="mb-8">
+                    <Link 
+                        to="/" 
+                        className="inline-flex items-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]"
+                    >
+                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Back to Products
+                    </Link>
+                </div>
+
+                {/* Main Product Card */}
+                <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                        {/* Image Section */}
+                        <div className="relative">
+                            <img 
+                                src={product.image} 
+                                alt={product.name} 
+                                className="w-full h-96 lg:h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+
+                        {/* Product Info Section */}
+                        <div className="p-8 lg:p-12 space-y-6">
+                            <div>
+                                <h1 className="text-4xl font-bold mb-4 text-[#0E2148]">
+                                    {product.name}
+                                </h1>
+                                <div className="mb-6">
+                                    <Rating rating={product.rating} numReviews={product.numreviews}/>
+                                </div>
+                                <p className="text-5xl font-bold mb-6 text-[#7965C1]">
+                                    ${product.price}
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="inline-block py-2 rounded-lg text-xl font-semibold text-[#483AA0]">
+                                    Description
+                                </h3>
+                                <hr />
+                                <p className="leading-relaxed text-lg text-[#483AA0] mt-4">
+                                    {product.desc}
+                                </p>
+                            </div>
+                            {product.countinstock ? (
+                                <div className="text-lg text-green-600 font-semibold">
+                                    In Stock: {product.countinstock}
+                                </div>
+                            ) : (
+                                <div className="text-lg text-red-600 font-semibold">
+                                    Out of Stock
+                                </div>
+                            )}
+
+                            <div className="space-y-6">
+                                <div>
+                                    <label className="block text-lg font-semibold mb-3 text-[#0E2148]">
+                                        Quantity
+                                    </label>
+                                    <select 
+                                        value={quantity} 
+                                        onChange={(e) => setQuantity(Number(e.target.value))}
+                                        className="border-2 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 transition-all duration-200 border-[#483AA0] focus:ring-[#7965C1]"
+                                    >
+                                        {[...Array(10)].map((_, i) => (
+                                            <option key={i + 1} value={i + 1}>{i + 1}</option>
+                                        ))}
+                                    </select>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-4 xl:gap-8">
+                                    <button 
+                                        className={product.countinstock ? "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-lg bg-[#483AA0] cursor-pointer" : "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold  shadow-lg bg-gray-400 cursor-not-allowed"}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default ProductDetails

@@ -4,6 +4,7 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import { Routes, Route } from "react-router-dom";
+import ProductDetails from "./pages/ProductDetails.jsx";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <Footer />
