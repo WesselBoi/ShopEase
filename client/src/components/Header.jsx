@@ -1,53 +1,58 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
-        <header className="bg-gray-900 shadow-lg border-b-2 border-gray-800">
+        <header className="shadow-lg border-b-2 border-blue-900" style={{ backgroundColor: '#0E2148' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0">
-                        <h1 className="text-xl sm:text-2xl font-bold text-blue-400 hover:text-blue-300 transition-colors duration-200">
+                        <Link to={"/"} className="text-xl sm:text-2xl font-bold hover:opacity-80 transition-opacity duration-200" style={{ color: '#E3D095' }}>
                             ShopEase
-                        </h1>
+                        </Link>
                     </div>
                     
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex space-x-8">
-                        <a href="/" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                        <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                             Home
-                        </a>
-                        <a href="/products" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                        </Link>
+                        <Link to="/products" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                             Products
-                        </a>
-                        <a href="/about" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                        </Link>
+                        <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                             About
-                        </a>
-                        <a href="/contact" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                        </Link>
+                        <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                             Contact
-                        </a>
+                        </Link>
                     </nav>
 
                     <div className="flex items-center space-x-2 sm:space-x-4">
                         {/* Desktop Sign In Button */}
-                        <button className="hidden sm:block bg-blue-600 hover:bg-blue-700 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
+                        <button 
+                            className="hidden sm:block text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 hover:scale-105"
+                            style={{ backgroundColor: '#483AA0' }}
+                        >
                             Sign In
                         </button>
                         
                         {/* Cart */}
                         <div className="relative">
-                            <span className="text-xl sm:text-2xl cursor-pointer hover:scale-110 transition-transform duration-200">
+                            <span className="text-xl sm:text-2xl cursor-pointer hover:scale-110 transition-transform duration-200" style={{ color: '#E3D095' }}>
                                 🛒
                             </span>
-                            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-bold">
+                            <span className="absolute -top-2 -right-2 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-bold" style={{ backgroundColor: '#7965C1' }}>
                                 0
                             </span>
                         </div>
 
                         {/* Mobile menu button */}
                         <button 
-                            className="md:hidden p-2 rounded-md text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors duration-200"
+                            className="md:hidden p-2 rounded-md transition-all duration-200 hover:opacity-80"
+                            style={{ color: '#E3D095', backgroundColor: 'rgba(72, 58, 160, 0.2)' }}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
                             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -63,21 +68,24 @@ function Header() {
 
                 {/* Mobile Navigation */}
                 {isMenuOpen && (
-                    <div className="md:hidden border-t border-gray-800 py-4">
+                    <div className="md:hidden border-t py-4" style={{ borderColor: '#483AA0' }}>
                         <div className="flex flex-col space-y-2">
-                            <a href="/" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                                 Home
-                            </a>
-                            <a href="/products" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            </Link>
+                            <Link to="/products" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                                 Products
-                            </a>
-                            <a href="/about" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            </Link>
+                            <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                                 About
-                            </a>
-                            <a href="/contact" className="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">
+                            </Link>
+                            <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300" style={{ color: '#E3D095' }}>
                                 Contact
-                            </a>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 mx-3 mt-2">
+                            </Link>
+                            <button 
+                                className="text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 mx-3 mt-2 hover:opacity-90"
+                                style={{ backgroundColor: '#483AA0' }}
+                            >
                                 Sign In
                             </button>
                         </div>
