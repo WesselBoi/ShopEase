@@ -1,31 +1,52 @@
 import React, { useState, useEffect } from "react";
-import products from "../products.js";
 import { Link } from "react-router-dom";
 import Rating from "../components/Rating.jsx";
+import axios from "axios";
 
 function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
+        setProducts(response.data);
+        setLoading(false);
+        setIsSuccess(true);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+        setProducts([]);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
   return (
-    <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#7965C1' }}>
+     <div className="min-h-screen py-12 px-4 bg-[#7965C1]">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6" style={{ color: '#E3D095' }}>
+          <h1 className="text-5xl font-bold mb-6 text-[#E3D095]">
             Our Premium Collection
           </h1>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#FFFFFF' }}>
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-white">
             Discover our amazing collection of products carefully selected just
             for you. Quality meets affordability in every item.
           </p>
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        { !loading ? (
+          <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products.map((product) => (
             <Link
               to={`/product/${product._id}`}
               key={product._id}
-              className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group"
-              style={{ backgroundColor: '#FFFFFF' }}
+              className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group bg-white"
             >
               <div className="relative overflow-hidden">
                 <img
@@ -33,30 +54,30 @@ function Home() {
                   alt={product.name}
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300" style={{ backgroundColor: '#0E2148' }}></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[#0E2148]"></div>
               </div>
 
               <div className="p-6">
-                <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80" style={{ color: '#0E2148' }}>
+                <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-[#0E2148]">
                   {product.name}
                 </h2>
-                <p className="mb-4 text-sm line-clamp-3 leading-relaxed" style={{ color: '#483AA0' }}>
+                <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-[#483AA0]">
                   {product.desc}
                 </p>
-                
+
                 {/* Rating Component */}
                 <div className="mb-4">
-                  <Rating rating={product.rating} numReviews={product.numreviews} />
+                  <Rating
+                    rating={product.rating}
+                    numReviews={product.numreviews}
+                  />
                 </div>
-                
+
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold" style={{ color: '#7965C1' }}>
+                  <span className="text-2xl font-bold text-[#7965C1]">
                     ${product.price}
                   </span>
-                  <button 
-                    className="px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:scale-105"
-                    style={{ backgroundColor: '#483AA0' }}
-                  >
+                  <button className="px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]">
                     Add to Cart
                   </button>
                 </div>
@@ -64,9 +85,63 @@ function Home() {
             </Link>
           ))}
         </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center h-screen">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
+          </div>
+        )}
+        
       </div>
     </div>
   );
 }
 
 export default Home;
+
+
+
+{/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {products.map((product) => (
+            <Link
+              to={`/product/${product._id}`}
+              key={product._id}
+              className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group bg-white"
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[#0E2148]"></div>
+              </div>
+
+              <div className="p-6">
+                <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-[#0E2148]">
+                  {product.name}
+                </h2>
+                <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-[#483AA0]">
+                  {product.desc}
+                </p>
+
+                {/* Rating Component */}
+        //         <div className="mb-4">
+        //           <Rating
+        //             rating={product.rating}
+        //             numReviews={product.numreviews}
+        //           />
+        //         </div>
+
+        //         <div className="flex items-center justify-between">
+        //           <span className="text-2xl font-bold text-[#7965C1]">
+        //             ${product.price}
+        //           </span>
+        //           <button className="px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]">
+        //             Add to Cart
+        //           </button>
+        //         </div>
+        //       </div>
+        //     </Link>
+        //   ))}
+        // </div> */}
