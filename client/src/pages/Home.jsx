@@ -69,13 +69,10 @@ function Home() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-center">
                     <span className="text-2xl font-bold text-[#7965C1]">
                       ${product.price}
                     </span>
-                    <button className="px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]">
-                      Add to Cart
-                    </button>
                   </div>
                 </div>
               </Link>

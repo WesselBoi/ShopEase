@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+    const { cartItems} = useSelector((state) => state.cart)
     return (
         <header className="shadow-lg border-b-2 border-blue-900" style={{ backgroundColor: '#0E2148' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,11 +43,11 @@ function Header() {
                         
                         {/* Cart */}
                         <div className="relative">
-                            <span className="text-xl sm:text-2xl cursor-pointer hover:scale-110 transition-transform duration-200" style={{ color: '#E3D095' }}>
+                            <Link to={"/cart"} className="text-xl sm:text-2xl cursor-pointer hover:scale-110 transition-transform duration-200" style={{ color: '#E3D095' }}>
                                 🛒
-                            </span>
+                            </Link>
                             <span className="absolute -top-2 -right-2 text-white text-xs rounded-full h-4 w-4 sm:h-5 sm:w-5 flex items-center justify-center font-bold" style={{ backgroundColor: '#7965C1' }}>
-                                0
+                                {cartItems?.length > 0 ? cartItems.reduce((acc,item) => acc + item.qty, 0) : 0}
                             </span>
                         </div>
 
