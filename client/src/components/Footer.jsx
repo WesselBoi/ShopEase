@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="text-white" style={{ backgroundColor: '#0E2148' }}>
+    <footer className="text-white bg-darkerBg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="col-span-1 lg:col-span-1">
-            <h2 className="text-2xl font-bold mb-4" style={{ color: '#E3D095' }}>
+            <h2 className="text-2xl font-bold mb-4 text-goldish">
               ShopEase
             </h2>
             <p className="mb-6 text-sm leading-relaxed text-gray-300">
@@ -19,8 +19,7 @@ function Footer() {
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="transition-colors duration-200 hover:opacity-80"
-                style={{ color: '#7965C1' }}
+                className="transition-colors duration-200 hover:opacity-80 text-lightPurple"
               >
                 <span className="sr-only">Facebook</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -29,8 +28,7 @@ function Footer() {
               </a>
               <a
                 href="#"
-                className="transition-colors duration-200 hover:opacity-80"
-                style={{ color: '#7965C1' }}
+                className="transition-colors duration-200 hover:opacity-80 text-lightPurple"
               >
                 <span className="sr-only">Instagram</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -39,8 +37,7 @@ function Footer() {
               </a>
               <a
                 href="#"
-                className="transition-colors duration-200 hover:opacity-80"
-                style={{ color: '#7965C1' }}
+                className="transition-colors duration-200 hover:opacity-80 text-lightPurple"
               >
                 <span className="sr-only">Twitter</span>
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -52,7 +49,7 @@ function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4" style={{ color: '#E3D095' }}>
+            <h3 className="text-lg font-semibold mb-4 text-goldish">
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -101,7 +98,7 @@ function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-semibold mb-4" style={{ color: '#E3D095' }}>
+            <h3 className="text-lg font-semibold mb-4 text-goldish">
               Customer Service
             </h3>
             <ul className="space-y-2">
@@ -150,7 +147,7 @@ function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4" style={{ color: '#E3D095' }}>
+            <h3 className="text-lg font-semibold mb-4 text-goldish">
               Stay Updated
             </h3>
             <p className="text-sm mb-4 text-gray-300">
@@ -161,17 +158,15 @@ function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-3 py-2 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent text-sm"
+                  className="w-full px-3 py-2 border border-mediumBlue rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent text-sm"
                   style={{ 
-                    backgroundColor: 'rgba(121, 101, 193, 0.2)', 
-                    borderColor: '#483AA0'
+                    backgroundColor: 'rgba(121, 101, 193, 0.2)'
                   }}
                 />
               </div>
               <button
                 type="submit"
-                className="w-full text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 hover:scale-105"
-                style={{ backgroundColor: '#483AA0' }}
+                className="w-full text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
               >
                 Subscribe
               </button>
@@ -180,7 +175,7 @@ function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t mt-12 pt-8" style={{ borderColor: '#483AA0' }}>
+        <div className="border-t border-mediumBlue mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm mb-4 md:mb-0 text-gray-300">
               © 2025 ShopEase. All rights reserved.

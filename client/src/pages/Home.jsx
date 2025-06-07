@@ -6,11 +6,11 @@ function Home() {
   const { data: products, isLoading, isError } = useGetProductsQuery();
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-[#7965C1]">
+    <div className="min-h-screen py-12 px-4 bg-purpleBg">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6 text-[#E3D095]">
+          <h1 className="text-5xl font-bold mb-6 text-goldish">
             Our Premium Collection
           </h1>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed text-white">
@@ -31,7 +31,7 @@ function Home() {
             </div>
             <button 
               onClick={() => window.location.reload()} 
-              className="px-6 py-3 bg-[#483AA0] text-white rounded-lg hover:opacity-90 transition-all duration-200"
+              className="px-6 py-3 bg-mediumBlue text-white rounded-lg hover:opacity-90 transition-all duration-200"
             >
               Try Again
             </button>
@@ -50,14 +50,14 @@ function Home() {
                     alt={product.name}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-[#0E2148]"></div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-darkerBg"></div>
                 </div>
 
                 <div className="p-6">
-                  <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-[#0E2148]">
+                  <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-darkerBg">
                     {product.name}
                   </h2>
-                  <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-[#483AA0]">
+                  <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-mediumBlue">
                     {product.desc}
                   </p>
 
@@ -70,7 +70,7 @@ function Home() {
                   </div>
 
                   <div className="flex items-center justify-center">
-                    <span className="text-2xl font-bold text-[#7965C1]">
+                    <span className="text-2xl font-bold text-lightPurple">
                       ${product.price}
                     </span>
                   </div>

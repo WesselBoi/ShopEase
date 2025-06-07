@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    --color-purpleBg: #7965C1;   
+    --color-goldish: #E3D095;   
+    --color-darkerBg: #0E2148;
+    --color-mediumBlue: #483AA0;
+    --color-lightPurple: #7965C1;
+}

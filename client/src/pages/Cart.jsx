@@ -6,7 +6,7 @@ import { FaTrashAlt } from "react-icons/fa";
 
 function Cart() {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
 
   const addToCartHandler = (product, qty) => {
@@ -27,11 +27,11 @@ function Cart() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-[#7965C1]">
+    <div className="min-h-screen py-12 px-4 bg-purpleBg">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold mb-6 text-[#E3D095]">
+          <h1 className="text-5xl font-bold mb-6 text-goldish">
             Shopping Cart
           </h1>
           <p className="text-xl max-w-3xl mx-auto leading-relaxed text-white">
@@ -44,16 +44,16 @@ function Cart() {
           <div className="bg-white rounded-2xl shadow-2xl p-12 text-center">
             <div className="mb-8">
               <div className="text-6xl mb-4">🛒</div>
-              <h2 className="text-3xl font-bold mb-4 text-[#0E2148]">
+              <h2 className="text-3xl font-bold mb-4 text-darkerBg">
                 Your cart is empty
               </h2>
-              <p className="text-lg text-[#483AA0] mb-8">
+              <p className="text-lg text-mediumBlue mb-8">
                 Looks like you haven't added any items to your cart yet.
               </p>
             </div>
             <Link
               to="/"
-              className="inline-flex items-center px-8 py-4 rounded-lg text-white font-semibold text-lg transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]"
+              className="inline-flex items-center px-8 py-4 rounded-lg text-white font-semibold text-lg transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -97,11 +97,11 @@ function Cart() {
                     <div className="flex-1 p-6 flex flex-col justify-between">
                       <div>
                         <Link to={`/product/${item._id}`}>
-                          <h3 className="text-xl font-bold mb-2 text-[#0E2148]">
+                          <h3 className="text-xl font-bold mb-2 text-darkerBg">
                             {item.name}
                           </h3>
                         </Link>
-                        <p className="text-2xl font-bold mb-4 text-[#7965C1]">
+                        <p className="text-2xl font-bold mb-4 text-purpleBg">
                           ${item.price}
                         </p>
                       </div>
@@ -109,7 +109,7 @@ function Cart() {
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         {/* Quantity Selector */}
                         <div className="flex items-center space-x-3">
-                          <label className="text-sm font-medium text-[#0E2148]">
+                          <label className="text-sm font-medium text-darkerBg">
                             Quantity:
                           </label>
                           <select
@@ -117,7 +117,7 @@ function Cart() {
                             onChange={(e) =>
                               addToCartHandler(item, Number(e.target.value))
                             }
-                            className="border-2 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 transition-all duration-200 border-[#483AA0] focus:ring-[#7965C1]"
+                            className="border-2 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg"
                           >
                             {[...Array(10)].map((_, i) => (
                               <option key={i + 1} value={i + 1}>
@@ -141,36 +141,36 @@ function Cart() {
             {/* Order Summary Column */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
-                <h3 className="text-2xl font-bold mb-6 text-[#0E2148]">
+                <h3 className="text-2xl font-bold mb-6 text-darkerBg">
                   Order Summary
                 </h3>
 
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between">
-                    <span className="text-[#483AA0]">
+                    <span className="text-mediumBlue">
                       Items (
                       {cartItems.reduce((acc, item) => acc + item.qty, 0)})
                     </span>
-                    <span className="font-semibold text-[#0E2148]">
+                    <span className="font-semibold text-darkerBg">
                       ${totalPrice.toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#483AA0]">Shipping</span>
-                    <span className="font-semibold text-[#0E2148]">
+                    <span className="text-mediumBlue">Shipping</span>
+                    <span className="font-semibold text-darkerBg">
                       ${totalPrice > 100 ? "0.00" : "10.00"}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#483AA0]">Tax</span>
-                    <span className="font-semibold text-[#0E2148]">
+                    <span className="text-mediumBlue">Tax</span>
+                    <span className="font-semibold text-darkerBg">
                       ${(totalPrice * 0.18).toFixed(2)}
                     </span>
                   </div>
-                  <hr className="border-[#483AA0]" />
+                  <hr className="border-mediumBlue" />
                   <div className="flex justify-between text-xl">
-                    <span className="font-bold text-[#0E2148]">Total</span>
-                    <span className="font-bold text-[#7965C1]">
+                    <span className="font-bold text-darkerBg">Total</span>
+                    <span className="font-bold text-purpleBg">
                       $
                       {(
                         totalPrice +
@@ -182,12 +182,12 @@ function Cart() {
                 </div>
 
                 <div className="space-y-3">
-                  <button className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]" onClick={checkoutHandler}>
+                  <button className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue" onClick={checkoutHandler}>
                     Proceed to Checkout
                   </button>
                   <Link
                     to="/"
-                    className="block w-full text-center text-[#483AA0] py-3 px-6 rounded-lg font-medium border-2 border-[#483AA0] transition-all duration-200 hover:bg-[#483AA0] hover:text-white"
+                    className="block w-full text-center text-mediumBlue py-3 px-6 rounded-lg font-medium border-2 border-mediumBlue transition-all duration-200 hover:bg-mediumBlue hover:text-white"
                   >
                     Continue Shopping
                   </Link>

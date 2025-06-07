@@ -21,13 +21,13 @@ function ProductDetails() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-[#7965C1]">
+    <div className="min-h-screen py-12 px-4 bg-purpleBg">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <div className="mb-8">
           <Link
             to="/"
-            className="inline-flex items-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-[#483AA0]"
+            className="inline-flex items-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -58,7 +58,7 @@ function ProductDetails() {
             </div>
             <Link
               to="/"
-              className="px-6 py-3 bg-[#483AA0] text-white rounded-lg hover:opacity-90 transition-all duration-200"
+              className="px-6 py-3 bg-mediumBlue text-white rounded-lg hover:opacity-90 transition-all duration-200"
             >
               Back to Home
             </Link>
@@ -79,7 +79,7 @@ function ProductDetails() {
               {/* Product Info Section */}
               <div className="p-8 lg:p-12 space-y-6">
                 <div>
-                  <h1 className="text-4xl font-bold mb-4 text-[#0E2148]">
+                  <h1 className="text-4xl font-bold mb-4 text-darkerBg">
                     {product.name}
                   </h1>
                   <div className="mb-6">
@@ -88,17 +88,17 @@ function ProductDetails() {
                       numReviews={product.numreviews}
                     />
                   </div>
-                  <p className="text-5xl font-bold mb-6 text-[#7965C1]">
+                  <p className="text-5xl font-bold mb-6 text-purpleBg">
                     ${product.price}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="inline-block py-2 rounded-lg text-xl font-semibold text-[#483AA0]">
+                  <h3 className="inline-block py-2 rounded-lg text-xl font-semibold text-mediumBlue">
                     Description
                   </h3>
                   <hr />
-                  <p className="leading-relaxed text-lg text-[#483AA0] mt-4">
+                  <p className="leading-relaxed text-lg text-mediumBlue mt-4">
                     {product.desc}
                   </p>
                 </div>
@@ -114,13 +114,13 @@ function ProductDetails() {
 
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-lg font-semibold mb-3 text-[#0E2148]">
+                    <label className="block text-lg font-semibold mb-3 text-darkerBg">
                       Quantity
                     </label>
                     <select
                       value={quantity}
                       onChange={(e) => setQuantity(Number(e.target.value))}
-                      className="border-2 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 transition-all duration-200 border-[#483AA0] focus:ring-[#7965C1] cursor-pointer disabled:cursor-not-allowed"
+                      className="border-2 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg cursor-pointer disabled:cursor-not-allowed"
                       disabled={!product.countinstock}
                     >
                       {[...Array(maxQty)].map((_, i) => (
@@ -135,10 +135,11 @@ function ProductDetails() {
                     <button
                       className={
                         product.countinstock
-                          ? "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-lg bg-[#483AA0] cursor-pointer"
+                          ? "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-lg bg-mediumBlue cursor-pointer"
                           : "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold  shadow-lg bg-gray-400 cursor-not-allowed"
                       }
                       onClick={addToCartHandler}
+                      disabled={!product.countinstock}
                     >
                       Add to Cart
                     </button>
