@@ -21,13 +21,13 @@ function Header() {
                         <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
                             Home
                         </Link>
-                        <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
+                        <Link to="/products" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
                             Products
                         </Link>
-                        <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
+                        <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
                             About
                         </Link>
-                        <Link to="/" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
+                        <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
                             Contact
                         </Link>
                     </nav>
