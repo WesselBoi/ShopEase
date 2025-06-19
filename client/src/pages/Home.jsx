@@ -106,7 +106,7 @@ function Home() {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className='w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500'
+                      className='w-full h-48 object-contain group-hover:scale-110 transition-transform duration-500'
                     />
                     <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300'></div>
                   </div>

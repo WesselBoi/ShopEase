@@ -83,7 +83,7 @@ function Cart() {
                 >
                   <div className="flex flex-col sm:flex-row">
                     {/* Product Image */}
-                    <div className="sm:w-48 h-48 sm:h-auto">
+                    <div className="sm:w-48 h-auto sm:h-auto">
                       <Link to={`/product/${item._id}`}>
                         <img
                           src={item.image}

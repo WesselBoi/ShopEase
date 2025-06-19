@@ -26,7 +26,7 @@ function ProductDetails() {
         {/* Back Button */}
         <div className="mb-8">
           <Link
-            to="/"
+            to="/products"
             className="inline-flex items-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
           >
             <svg
