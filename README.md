@@ -3,3 +3,4 @@ E Commerce app with everything
 JWT Authentication
 redux toolkit
 router
+soon . . . 
