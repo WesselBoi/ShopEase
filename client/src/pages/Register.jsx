@@ -12,6 +12,14 @@ function Register() {
     confirmPassword: "" // Added for validation
   });
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useSelector((state) => state.auth)
+  console.log(isAuthenticated)
+
+  if(isAuthenticated) {
+    navigate("/")
+  }
+
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -288,27 +296,6 @@ function Register() {
                 Sign in here
               </Link>
             </p>
-          </div>
-        </div>
-
-        {/* Quick Access */}
-        <div className='mt-8'>
-          <div className='relative'>
-            <div className='absolute inset-0 flex items-center'>
-              <div className='w-full border-t border-white border-opacity-30' />
-            </div>
-            <div className='relative flex justify-center text-sm'>
-              <span className='px-2 bg-transparent text-white opacity-75'>Quick access</span>
-            </div>
-          </div>
-
-          <div className='mt-6'>
-            <Link 
-              to='/products'
-              className='w-full flex justify-center px-4 py-3 border border-white border-opacity-30 rounded-lg shadow-sm bg-white bg-opacity-10 text-white font-medium hover:bg-opacity-20 transition-all duration-200'
-            >
-              Continue as Guest
-            </Link>
           </div>
         </div>
       </div>

@@ -5,6 +5,15 @@ import { useLoginMutation } from "../slices/authApiSlice";
 import { setCredentials } from "../slices/authSlice"; 
 
 function Login() {
+
+      const navigate = useNavigate();
+
+
+  const { isAuthenticated } = useSelector((state) => state.auth)
+
+  if (isAuthenticated) {
+    navigate("/")
+  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,7 +21,6 @@ function Login() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Get login mutation from RTK Query

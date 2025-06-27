@@ -8,7 +8,7 @@ async function handleRegister(req, res) {
   }
   try {
     const { name, email, password } = req.body;
-    const existingUser = await User.find({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser.length > 0) {
       return res.status(400).json({ error: "User already exists" });
     }
@@ -69,9 +69,22 @@ async function HandleLogout(_, res) {
   }
 }
 
+async function getUserProfile (req,res) {
+  console.log("User ID : " , req.user.userId)
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ error : err.message });
+  }
+}
 
 module.exports = {
   handleRegister,
   handleLogin,
-  HandleLogout
+  HandleLogout,
+  getUserProfile
 };

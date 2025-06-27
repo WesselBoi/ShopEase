@@ -1,5 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Helper function to get user info from localStorage
+const getUserFromStorage = () => {
+  try {
+    const userInfo = localStorage.getItem("userInfo");
+    return userInfo ? JSON.parse(userInfo) : null;
+  } catch (error) {
+    console.error("Error parsing userInfo from localStorage:", error);
+    localStorage.removeItem("userInfo"); // Clear corrupted data
+    return null;
+  }
+};
+
 //Starting state - like an empty membership database
 const initialState = {
   userInfo: localStorage.getItem("userInfo")

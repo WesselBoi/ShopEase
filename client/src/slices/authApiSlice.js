@@ -27,8 +27,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: `${USERS_URL}/logout`,
                 method: "POST",
             })
+        }),
+
+        // Get user profile endpoint
+        getUserProfile: builder.query({
+            query: () => ({
+                url : `${USERS_URL}/profile`,
+            }),
+            providesTags: ['User']  
         })
     })
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation , useGetUserProfileQuery } = authApiSlice;

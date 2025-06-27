@@ -48,19 +48,30 @@ function Header() {
             >
               Contact
             </Link>
+            {isAuthenticated ? (
+              <div>
+                <span className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
+                  <Link to={"/profile"}>Welcome, {userInfo.name}!</Link>
+                </span>
+                <LogoutButton />
+              </div>
+            ) : (
+              <div>
+                <Link
+                  to="/login"
+                  className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </nav>
-
-          {isAuthenticated ? (
-            <div>
-              <span className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">Welcome, {userInfo.name}!</span>
-              <LogoutButton />
-            </div>
-          ) : (
-            <div>
-              <Link to="/login" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">Login</Link>
-              <Link to="/register" className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">Register</Link>
-            </div>
-          )}
 
           <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Cart */}
@@ -138,9 +149,29 @@ function Header() {
               >
                 Contact
               </Link>
-              <button className="text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 mx-3 mt-2 hover:opacity-90 bg-mediumBlue">
-                Sign In
-              </button>
+              {isAuthenticated ? (
+                <div>
+                  <span className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish">
+                    Welcome, {userInfo.name}!
+                  </span>
+                  <LogoutButton />
+                </div>
+              ) : (
+                <div>
+                  <Link
+                    to="/login"
+                    className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-yellow-300 text-goldish"
+                  >
+                    Register
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}
