@@ -18,7 +18,7 @@ function LogoutButton({ className }) {
       dispatch(logout())
       
       // Redirect to home page
-      navigate('/')
+      navigate('/login')
     } catch (err) {
       // Even if API call fails, still logout locally
       dispatch(logout())
