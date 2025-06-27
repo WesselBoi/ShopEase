@@ -55,8 +55,23 @@ async function handleLogin(req, res) {
   }
 }
 
+async function HandleLogout(_, res) {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // Changed for cross-origin
+      domain: process.env.NODE_ENV === "production" ? undefined : "localhost",
+    });
+    res.status(200).json({ message: "Logout successful" });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to logout" });
+  }
+}
+
 
 module.exports = {
   handleRegister,
   handleLogin,
+  HandleLogout
 };

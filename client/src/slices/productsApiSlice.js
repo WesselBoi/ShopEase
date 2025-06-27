@@ -1,21 +1,23 @@
-import { PRODUCTS_URL } from '../constants';
-import { apiSlice } from './apiSlice';
+import { PRODUCTS_URL } from "../constants";
+import { apiSlice } from "./apiSlice";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-        query: () => ({
-            url: PRODUCTS_URL,
-        }),
-        keepUnusedDataFor: 5
+      //query used for get requests , mutation used for post requests
+      query: () => ({
+        url: PRODUCTS_URL,
+      }),
+      keepUnusedDataFor: 5,
     }),
     getProductDetails: builder.query({
-        query: (productId) => ({
-            url: `${PRODUCTS_URL}/${productId}`,
-        }),
-        keepUnusedDataFor: 5,
-    })
+      query: (productId) => ({
+        url: `${PRODUCTS_URL}/${productId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
-export const { useGetProductsQuery , useGetProductDetailsQuery } = productsApiSlice;
+export const { useGetProductsQuery, useGetProductDetailsQuery } =
+  productsApiSlice;

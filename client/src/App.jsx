@@ -9,6 +9,8 @@ import Contact from "./pages/Contact.jsx";
 import { Routes, Route } from "react-router-dom";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx"; 
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <Footer />
