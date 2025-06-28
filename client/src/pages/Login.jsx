@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../slices/authApiSlice"; 
-import { setCredentials } from "../slices/authSlice"; 
+import { useLoginMutation } from "../slices/authApiSlice";
+import { setCredentials } from "../slices/authSlice";
+import { useLocation } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
 
-      const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirect = searchParams.get("redirect") || "/";
 
 
-  const { isAuthenticated } = useSelector((state) => state.auth)
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(redirect);
+    }
+  }, [isAuthenticated, navigate, redirect]);
 
-  if (isAuthenticated) {
-    navigate("/")
-  }
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -93,7 +100,6 @@ function Login() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-
             <div>
               <label
                 htmlFor="email"

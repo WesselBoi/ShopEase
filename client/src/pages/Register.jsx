@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slices/authApiSlice";
@@ -9,16 +9,18 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "" // Added for validation
+    confirmPassword: "" 
   });
   const navigate = useNavigate();
 
   const { isAuthenticated } = useSelector((state) => state.auth)
   console.log(isAuthenticated)
 
-  if(isAuthenticated) {
-    navigate("/")
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   const dispatch = useDispatch();
   const [error, setError] = useState("");

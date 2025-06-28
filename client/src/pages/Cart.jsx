@@ -2,12 +2,13 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link , useNavigate} from "react-router-dom";
 import { addToCart , removeFromCart } from "../slices/cartSlice";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt , FaUser , FaLock} from "react-icons/fa";
 
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo , isAuthenticated } = useSelector((state) => state.auth)
 
   const addToCartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));
@@ -23,7 +24,11 @@ function Cart() {
   );
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=/shipping");
+    if(isAuthenticated && userInfo) {
+      navigate("/shipping")
+    } else {
+      navigate("/login?redirect=/shipping");
+    }
   }
 
   return (
@@ -181,10 +186,58 @@ function Cart() {
                   </div>
                 </div>
 
+{/* ← Enhanced Authentication Status Display */}
+                {!isAuthenticated && (
+                  <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div className="flex items-center">
+                      <FaLock className="text-yellow-600 mr-2" />
+                      <p className="text-sm text-yellow-800">
+                        Please sign in to proceed with checkout
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {isAuthenticated && (
+                  <div className="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center">
+                      <FaUser className="text-green-600 mr-2" />
+                      <p className="text-sm text-green-800">
+                        Signed in as <span className="font-medium">{userInfo?.name}</span>
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-3">
-                  <button className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue" onClick={checkoutHandler}>
-                    Proceed to Checkout
-                  </button>
+                  {/* ← Enhanced Checkout Button with Auth Logic */}
+                  {isAuthenticated ? (
+                    <button 
+                      className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
+                      onClick={checkoutHandler}
+                    >
+                      <div className="flex items-center justify-center">
+                        <FaLock className="mr-2" />
+                        Proceed to Checkout
+                      </div>
+                    </button>
+                  ) : (
+                    <div className="space-y-2">
+                      <button 
+                        className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-lightPurple"
+                        onClick={checkoutHandler}
+                      >
+                        <div className="flex items-center justify-center">
+                          <FaUser className="mr-2" />
+                          Sign In to Checkout
+                        </div>
+                      </button>
+                      <p className="text-xs text-center text-mediumBlue">
+                        New customer? <Link to="/register" className="text-lightPurple font-medium">Create an account</Link>
+                      </p>
+                    </div>
+                  )}
+                  
                   <Link
                     to="/"
                     className="block w-full text-center text-mediumBlue py-3 px-6 rounded-lg font-medium border-2 border-mediumBlue transition-all duration-200 hover:bg-mediumBlue hover:text-white"

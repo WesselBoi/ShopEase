@@ -13,6 +13,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx"; 
 import Profile from "./pages/Profile.jsx"
 import { useAuthPersist } from './hooks/useAuthPersist';
+import Shipping from "./pages/Shipping.jsx"
 
 function App() {
     useAuthPersist();       // hook to restore auth state on app load
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/shipping" element={<Shipping />} />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <Footer />

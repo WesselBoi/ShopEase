@@ -1,4 +1,3 @@
-// Create: client/src/hooks/useAuthPersist.js
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../slices/authSlice';
