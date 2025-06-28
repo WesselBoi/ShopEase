@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const productsRouter = require('./routes/products');
 const authRouter = require('./routes/auth');
+const orderRouter = require('./routes/order');
 const connectToMongoDB = require('./connection');
 const {notFound, errorHandler} = require('./middlewares/errorMiddleware');
 const dotenv = require('dotenv');
@@ -29,6 +30,7 @@ app.get("/" ,(_,res) => {
 
 app.use("/api/products" , productsRouter);
 app.use("/api/auth" , authRouter);
+app.use("/api/orders" , orderRouter);
 
 app.use(notFound);
 app.use(errorHandler);
