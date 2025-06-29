@@ -1,4 +1,3 @@
-// filepath: /Users/apple/Desktop/E-Commerce MERN/client/src/pages/Shipping.jsx
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,6 @@ function Shipping() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Redirect if no cart items
   useEffect(() => {
     if (cartItems.length === 0) {
       navigate('/cart');
@@ -39,7 +37,7 @@ function Shipping() {
       [name]: value
     }));
     
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
