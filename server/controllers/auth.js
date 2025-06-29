@@ -70,7 +70,6 @@ async function HandleLogout(_, res) {
 }
 
 async function getUserProfile (req,res) {
-  console.log("User ID : " , req.user.userId)
   try {
     const user = await User.findById(req.user._id).select("-password");
     if (!user) {

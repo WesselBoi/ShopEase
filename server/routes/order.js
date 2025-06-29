@@ -1,4 +1,3 @@
-// server/routes/orders.js
 const express = require('express');
 const {
   createOrder,
@@ -9,8 +8,6 @@ const {
 const auth  = require('../middlewares/authMiddleware');
 
 const router = express.Router();
-
-// Public routes (none for orders)
 
 // Protected user routes
 router.post('/', auth, createOrder);

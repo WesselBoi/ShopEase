@@ -1,10 +1,7 @@
-// filepath: /Users/apple/Desktop/E-Commerce MERN/server/controllers/order.js
 const Order = require("../models/order");
 const Product = require("../models/product");
 
-// @desc    Create new order
-// @route   POST /api/orders
-// @access  Private
+// Create new order
 const createOrder = async (req, res) => {
   try {
     const {
@@ -17,28 +14,17 @@ const createOrder = async (req, res) => {
       totalPrice,
     } = req.body;
 
-    // ← Add validation for orderItems
     if (!orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
       return res.status(400).json({ error: "No order items provided" });
     }
 
-    // ← Add validation for required fields
     if (!shippingAddress || !paymentMethod) {
       return res.status(400).json({ error: "Shipping address and payment method are required" });
     }
 
-    console.log("Received order data:", {
-      orderItems: orderItems.length,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice
-    });
-
     // Verify all products exist and have sufficient stock
     for (let item of orderItems) {
+
       if (!item._id) {
         return res.status(400).json({ error: "Product ID is required for all items" });
       }
@@ -47,15 +33,20 @@ const createOrder = async (req, res) => {
       if (!product) {
         return res.status(404).json({ error: `Product ${item.name} not found` });
       }
-      
-      if (product.countInStock < item.qty) {
+
+      if (product.countinstock <= 0) {
         return res.status(400).json({
-          error: `Not enough stock for ${item.name}. Available: ${product.countInStock}`,
+          error: `Product ${item.name} is out of stock`,
+        });
+      }
+
+      if (product.countinstock < item.qty) {
+        return res.status(400).json({
+          error: `Not enough stock for ${item.name}. Available: ${product.countinstock}`,
         });
       }
     }
 
-    // ← Fixed: Create order with correct structure
     const order = await Order.create({
       user: req.user._id,
       orderItems: orderItems.map((item) => ({
@@ -81,11 +72,11 @@ const createOrder = async (req, res) => {
     // Update product stock
     for (let item of orderItems) {
       await Product.findByIdAndUpdate(item._id, {
-        $inc: { countInStock: -item.qty },
+        $inc: { countinstock: -item.qty },
       });
     }
 
-    // ← Fixed: Return the created order
+    // Return the created order
     res.status(201).json(order);
   } catch (error) {
     console.error("Create order error:", error);
@@ -93,9 +84,7 @@ const createOrder = async (req, res) => {
   }
 };
 
-// @desc    Get order by ID
-// @route   GET /api/orders/:id
-// @access  Private
+// Get order by ID
 const getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate("user", "name email");
@@ -116,9 +105,7 @@ const getOrderById = async (req, res) => {
   }
 };
 
-// @desc    Get logged in user orders
-// @route   GET /api/orders/myorders
-// @access  Private
+// Get logged in user orders
 const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id }).sort({
@@ -131,9 +118,7 @@ const getMyOrders = async (req, res) => {
   }
 };
 
-// @desc    Get all orders (Admin)
-// @route   GET /api/orders
-// @access  Private/Admin
+// Get all orders (Admin)
 const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find({})
@@ -146,9 +131,7 @@ const getAllOrders = async (req, res) => {
   }
 };
 
-// @desc    Update order to paid
-// @route   PUT /api/orders/:id/pay
-// @access  Private
+// Update order to paid
 const updateOrderToPaid = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -179,9 +162,7 @@ const updateOrderToPaid = async (req, res) => {
   }
 };
 
-// @desc    Update order to delivered (Admin)
-// @route   PUT /api/orders/:id/deliver
-// @access  Private/Admin
+// Update order to delivered (Admin)
 const updateOrderToDelivered = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
