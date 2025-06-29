@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateOrderMutation } from '../slices/orderApiSlice';
@@ -13,16 +13,20 @@ function PlaceOrder() {
   const { userInfo } = useSelector((state) => state.auth);
   
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  
+  const [isOrderProcessing, setIsOrderProcessing] = useState(false);
 
   useEffect(() => {
-    if (!cart.shippingAddress) {
-      navigate('/shipping');
-    } else if (!cart.paymentMethod) {
-      navigate('/payment');
-    } else if (cart.cartItems.length === 0) {
-      navigate('/cart');
+    if (!isOrderProcessing) {
+      if (!cart.shippingAddress?.address) {
+        navigate('/shipping');
+      } else if (!cart.paymentMethod) {
+        navigate('/payment');
+      } else if (cart.cartItems.length === 0) {
+        navigate('/cart');
+      }
     }
-  }, [cart.paymentMethod, cart.shippingAddress, cart.cartItems, navigate]);
+  }, [cart.paymentMethod, cart.shippingAddress, cart.cartItems, navigate, isOrderProcessing]);
 
   // Calculate prices
   const itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
@@ -32,6 +36,8 @@ function PlaceOrder() {
 
   const placeOrderHandler = async () => {
     try {
+      setIsOrderProcessing(true);
+      
       const orderData = {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
@@ -46,14 +52,22 @@ function PlaceOrder() {
 
       const res = await createOrder(orderData).unwrap();
       
+      // Clear cart and navigate to success page
       dispatch(clearCartItems());
-      navigate(`/order/${res._id}`);
+      navigate("/ordersuccessfull", { 
+        state: { 
+          orderId: res._id,
+          orderData: res 
+        } 
+      });
     } catch (err) {
       console.error('Place order error:', err);
+      // ← Reset processing flag on error
+      setIsOrderProcessing(false);
     }
   };
 
-  if (cart.cartItems.length === 0) {
+  if (cart.cartItems.length === 0 && !isOrderProcessing) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center">
         <div className="text-center text-white">
@@ -92,16 +106,16 @@ function PlaceOrder() {
               </h3>
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-gray-700">
-                  <strong>Address:</strong> {cart.shippingAddress.address}
+                  <strong>Address:</strong> {cart.shippingAddress?.address}
                 </p>
                 <p className="text-gray-700">
-                  <strong>City:</strong> {cart.shippingAddress.city}
+                  <strong>City:</strong> {cart.shippingAddress?.city}
                 </p>
                 <p className="text-gray-700">
-                  <strong>Postal Code:</strong> {cart.shippingAddress.postalCode}
+                  <strong>Postal Code:</strong> {cart.shippingAddress?.postalCode}
                 </p>
                 <p className="text-gray-700">
-                  <strong>Country:</strong> {cart.shippingAddress.country}
+                  <strong>Country:</strong> {cart.shippingAddress?.country}
                 </p>
               </div>
             </div>

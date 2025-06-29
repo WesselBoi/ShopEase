@@ -96,7 +96,7 @@ function Profile() {
               {/* Quick Actions */}
               <div className="space-y-3">
                 <Link 
-                  to="/orders" 
+                  to="/myorders" 
                   className="block w-full py-3 px-4 bg-gradient-to-r from-lightPurple to-mediumBlue text-white rounded-xl hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                 >
                   View My Orders

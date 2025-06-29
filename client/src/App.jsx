@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -16,7 +15,9 @@ import { useAuthPersist } from './hooks/useAuthPersist';
 import Shipping from "./pages/Shipping.jsx"
 import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder';
-import OrderDetails from './pages/OrderDetails';
+// import OrderDetails from './pages/OrderDetails';
+import MyOrders from './pages/MyOrders.jsx';
+import OrderSuccessfull from './pages/OrderSuccessfull.jsx';
 
 function App() {
     useAuthPersist();       // hook to restore auth state on app load
@@ -38,7 +39,9 @@ function App() {
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
-        <Route path="/order/:id" element={<OrderDetails />} />
+        {/* <Route path="/order/:id" element={<OrderDetails />} /> */}
+        <Route path="/myorders" element={<MyOrders />} />
+        <Route path="/ordersuccessfull" element={<OrderSuccessfull />} />
         <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <Footer />
