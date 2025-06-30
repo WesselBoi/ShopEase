@@ -1,4 +1,0 @@
-todo for now:
-- payment paypal integration
-- my orders page on profile
-lol im 
