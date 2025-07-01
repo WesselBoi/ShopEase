@@ -71,7 +71,7 @@ function Products() {
 
                   <div className="flex items-center justify-center">
                     <span className="text-2xl font-bold text-lightPurple">
-                      ${product.price}
+                      ₹{product.price}
                     </span>
                   </div>
                 </div>

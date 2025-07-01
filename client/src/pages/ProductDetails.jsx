@@ -89,7 +89,7 @@ function ProductDetails() {
                     />
                   </div>
                   <p className="text-5xl font-bold mb-6 text-purpleBg">
-                    ${product.price}
+                    ₹{product.price}
                   </p>
                 </div>
 
