@@ -155,7 +155,7 @@ function PlaceOrder() {
                       <p className="text-sm text-gray-600">Quantity: {item.qty}</p>
                     </div>
                     <div className="text-gray-700 font-medium">
-                      ${(item.qty * item.price).toFixed(2)}
+                      ₹{(item.qty * item.price).toFixed(2)}
                     </div>
                   </div>
                 ))}
@@ -171,20 +171,20 @@ function PlaceOrder() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-700">Items ({cart.cartItems.reduce((acc, item) => acc + item.qty, 0)})</span>
-                  <span className="font-semibold">${itemsPrice.toFixed(2)}</span>
+                  <span className="font-semibold">₹{itemsPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-700">Shipping</span>
-                  <span className="font-semibold">${shippingPrice.toFixed(2)}</span>
+                  <span className="font-semibold">₹{shippingPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-700">Tax (18%)</span>
-                  <span className="font-semibold">${taxPrice.toFixed(2)}</span>
+                  <span className="font-semibold">₹{taxPrice.toFixed(2)}</span>
                 </div>
                 <hr className="border-gray-300" />
                 <div className="flex justify-between text-xl">
                   <span className="font-bold text-darkerBg">Total</span>
-                  <span className="font-bold text-lightPurple">${totalPrice.toFixed(2)}</span>
+                  <span className="font-bold text-lightPurple">₹{totalPrice.toFixed(2)}</span>
                 </div>
               </div>
 

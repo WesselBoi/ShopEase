@@ -61,13 +61,13 @@ function MyOrders() {
 
         {/* Orders Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+          <div className="bg-gray-300 rounded-2xl shadow-lg p-6 text-center">
             <div className="text-3xl text-lightPurple mb-2">📋</div>
             <h3 className="text-2xl font-bold text-darkerBg">{myOrders?.length || 0}</h3>
             <p className="text-gray-600">Total Orders</p>
           </div>
           
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+          <div className="bg-gray-300 rounded-2xl shadow-lg p-6 text-center">
             <div className="text-3xl text-green-600 mb-2">✅</div>
             <h3 className="text-2xl font-bold text-darkerBg">
               {myOrders?.filter(order => order.isPaid)?.length || 0}
@@ -75,7 +75,7 @@ function MyOrders() {
             <p className="text-gray-600">Paid Orders</p>
           </div>
           
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-center">
+          <div className="bg-gray-300 rounded-2xl shadow-lg p-6 text-center">
             <div className="text-3xl text-blue-600 mb-2">🚚</div>
             <h3 className="text-2xl font-bold text-darkerBg">
               {myOrders?.filter(order => order.isDelivered)?.length || 0}
@@ -122,7 +122,7 @@ function MyOrders() {
                       </p>
                     </div>
                     <div className="mt-4 md:mt-0 text-right">
-                      <div className="text-2xl font-bold">${order.totalPrice}</div>
+                      <div className="text-2xl font-bold">₹{order.totalPrice}</div>
                       <div className="text-sm opacity-90">
                         {order.orderItems?.length || 0} item{(order.orderItems?.length || 0) !== 1 ? 's' : ''}
                       </div>
@@ -131,7 +131,7 @@ function MyOrders() {
                 </div>
 
                 {/* Order Status */}
-                <div className="p-6 border-b border-gray-200">
+                <div className="p-6 border-b border-gray-200 bg-gray-300">
                   <div className="grid md:grid-cols-3 gap-4">
                     
                     {/* Payment Status */}
@@ -182,7 +182,7 @@ function MyOrders() {
                 </div>
 
                 {/* Order Items Preview */}
-                <div className="p-6">
+                <div className="p-6 bg-gray-300">
                   <h4 className="font-bold text-darkerBg mb-4">Order Items</h4>
                   <div className="space-y-3">
                     {order.orderItems?.slice(0, 3).map((item, index) => (
@@ -201,7 +201,7 @@ function MyOrders() {
                           </div>
                         </div>
                         <div className="font-semibold text-darkerBg">
-                          ${(item.price * item.qty).toFixed(2)}
+                          ₹{(item.price * item.qty).toFixed(2)}
                         </div>
                       </div>
                     ))}
@@ -212,28 +212,6 @@ function MyOrders() {
                       </div>
                     )}
                   </div>
-                </div>
-
-                {/* Order Actions */}
-                <div className="bg-gray-50 px-6 py-4 flex flex-col sm:flex-row gap-3 justify-end">
-                  <Link
-                    to={`/order/${order._id}`}
-                    className="px-6 py-2 bg-lightPurple text-white rounded-lg hover:opacity-90 transition-all duration-200 text-center"
-                  >
-                    View Details
-                  </Link>
-                  
-                  {order.isPaid && !order.isDelivered && (
-                    <button
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200"
-                      onClick={() => {
-                        // You can implement order tracking functionality here
-                        alert('Tracking feature coming soon!');
-                      }}
-                    >
-                      Track Order
-                    </button>
-                  )}
                 </div>
               </div>
             ))}

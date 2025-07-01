@@ -183,7 +183,7 @@ function OrderSuccessfull() {
               <div className="flex justify-between items-center">
                 <span className="text-gray-700">Total Amount:</span>
                 <span className="text-2xl font-bold text-lightPurple">
-                  ${orderData.totalPrice}
+                  ₹{orderData.totalPrice}
                 </span>
               </div>
               
@@ -191,15 +191,15 @@ function OrderSuccessfull() {
               <div className="mt-4 space-y-2 text-sm text-gray-600">
                 <div className="flex justify-between">
                   <span>Items:</span>
-                  <span>${orderData.itemsPrice}</span>
+                  <span>₹{orderData.itemsPrice}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping:</span>
-                  <span>${orderData.shippingPrice}</span>
+                  <span>₹{orderData.shippingPrice}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Tax:</span>
-                  <span>${orderData.taxPrice}</span>
+                  <span>₹{orderData.taxPrice}</span>
                 </div>
               </div>
             </div>

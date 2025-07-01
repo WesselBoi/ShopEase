@@ -76,7 +76,7 @@ function ProductDetails() {
               </div>
 
               {/* Product Info Section */}
-              <div className="p-8 lg:p-12 space-y-6">
+              <div className="p-8 lg:p-12 space-y-6 bg-gray-300">
                 <div>
                   <h1 className="text-4xl font-bold mb-4 text-darkerBg">
                     {product.name}

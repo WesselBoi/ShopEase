@@ -21,16 +21,19 @@ function Products() {
 
         {/* Products Grid */}
         {isLoading ? (
-          <div className="flex items-center justify-center h-screen">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
-          </div>
+      <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-goldish mx-auto mb-4"></div>
+          <h2 className="text-2xl text-white font-semibold">Loading Products</h2>
+        </div>
+      </div>
         ) : isError ? (
           <div className="flex flex-col items-center justify-center h-96 text-center">
             <div className="text-white text-xl mb-4">
               Oops! Something went wrong while loading products.
             </div>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="px-6 py-3 bg-mediumBlue text-white rounded-lg hover:opacity-90 transition-all duration-200"
             >
               Try Again
@@ -42,7 +45,7 @@ function Products() {
               <Link
                 to={`/product/${product._id}`}
                 key={product._id}
-                className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group bg-white"
+                className="flex flex-col rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group bg-white"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -53,11 +56,11 @@ function Products() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-darkerBg"></div>
                 </div>
 
-                <div className="p-6">
+                <div className="flex flex-col flex-grow p-6 bg-gray-300">
                   <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-darkerBg">
                     {product.name}
                   </h2>
-                  <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-mediumBlue">
+                  <p className="mb-4 text-sm line-clamp-3 leading-relaxed text-mediumBlue flex-grow">
                     {product.desc}
                   </p>
 
@@ -69,7 +72,7 @@ function Products() {
                     />
                   </div>
 
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center mt-auto">
                     <span className="text-2xl font-bold text-lightPurple">
                       ₹{product.price}
                     </span>
@@ -80,9 +83,7 @@ function Products() {
           </div>
         ) : (
           <div className="flex items-center justify-center h-96">
-            <div className="text-white text-xl">
-              No products found.
-            </div>
+            <div className="text-white text-xl">No products found.</div>
           </div>
         )}
       </div>

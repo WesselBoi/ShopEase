@@ -99,7 +99,7 @@ function Cart() {
                     </div>
 
                     {/* Product Details */}
-                    <div className="flex-1 p-6 flex flex-col justify-between">
+                    <div className="flex-1 p-6 flex flex-col justify-between bg-gray-300">
                       <div>
                         <Link to={`/product/${item._id}`}>
                           <h3 className="text-xl font-bold mb-2 text-darkerBg">

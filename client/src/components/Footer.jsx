@@ -144,63 +144,6 @@ function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Newsletter */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-goldish">
-              Stay Updated
-            </h3>
-            <p className="text-sm mb-4 text-gray-300">
-              Subscribe to our newsletter for exclusive offers and updates.
-            </p>
-            <form className="space-y-3">
-              <div>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-3 py-2 border border-mediumBlue rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent text-sm"
-                  style={{ 
-                    backgroundColor: 'rgba(121, 101, 193, 0.2)'
-                  }}
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-mediumBlue mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm mb-4 md:mb-0 text-gray-300">
-              © 2025 ShopEase. All rights reserved.
-            </div>
-            <div className="flex flex-wrap justify-center md:justify-end space-x-6">
-              <a
-                href="/privacy"
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="/terms"
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="/cookies"
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
-              >
-                Cookie Policy
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </footer>
