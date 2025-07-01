@@ -107,7 +107,7 @@ function Cart() {
                           </h3>
                         </Link>
                         <p className="text-2xl font-bold mb-4 text-purpleBg">
-                          ${item.price}
+                          ₹{item.price}
                         </p>
                       </div>
 
@@ -157,26 +157,26 @@ function Cart() {
                       {cartItems.reduce((acc, item) => acc + item.qty, 0)})
                     </span>
                     <span className="font-semibold text-darkerBg">
-                      ${totalPrice.toFixed(2)}
+                      ₹{totalPrice.toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-mediumBlue">Shipping</span>
                     <span className="font-semibold text-darkerBg">
-                      ${totalPrice > 100 ? "0.00" : "10.00"}
+                      ₹{totalPrice > 100 ? "0.00" : "10.00"}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-mediumBlue">Tax</span>
                     <span className="font-semibold text-darkerBg">
-                      ${(totalPrice * 0.18).toFixed(2)}
+                      ₹{(totalPrice * 0.18).toFixed(2)}
                     </span>
                   </div>
                   <hr className="border-mediumBlue" />
                   <div className="flex justify-between text-xl">
                     <span className="font-bold text-darkerBg">Total</span>
                     <span className="font-bold text-purpleBg">
-                      $
+                      ₹
                       {(
                         totalPrice +
                         (totalPrice > 100 ? 0 : 10) +
@@ -186,7 +186,6 @@ function Cart() {
                   </div>
                 </div>
 
-{/* ← Enhanced Authentication Status Display */}
                 {!isAuthenticated && (
                   <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                     <div className="flex items-center">
@@ -210,7 +209,6 @@ function Cart() {
                 )}
 
                 <div className="space-y-3">
-                  {/* ← Enhanced Checkout Button with Auth Logic */}
                   {isAuthenticated ? (
                     <button 
                       className="w-full text-white py-4 px-6 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
