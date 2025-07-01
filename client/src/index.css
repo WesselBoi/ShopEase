@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-    --color-purpleBg: #7965C1;   
-    --color-goldish: #E3D095;   
-    --color-darkerBg: #0E2148;
-    --color-mediumBlue: #483AA0;
-    --color-lightPurple: #7965C1;
+    --color-purpleBg: #222831;   
+    --color-goldish: #32E0C4;   
+    --color-darkerBg: #393E46;
+    --color-mediumBlue: #393E46;
+    --color-lightPurple: #393E46;
+}
+:root {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

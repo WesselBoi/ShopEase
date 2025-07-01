@@ -18,6 +18,7 @@ import PlaceOrder from './pages/PlaceOrder';
 // import OrderDetails from './pages/OrderDetails';
 import MyOrders from './pages/MyOrders.jsx';
 import OrderSuccessfull from './pages/OrderSuccessfull.jsx';
+import ScrollToTop from "./hooks/ScrollToTop.js";
 
 function App() {
     useAuthPersist();       // hook to restore auth state on app load
@@ -25,6 +26,7 @@ function App() {
   return (
     <div>
       <Header />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<Home />} />

@@ -48,7 +48,6 @@ function PlaceOrder() {
         totalPrice: totalPrice.toFixed(2),
       };
 
-      console.log('Creating order with data:', orderData);
 
       const res = await createOrder(orderData).unwrap();
       

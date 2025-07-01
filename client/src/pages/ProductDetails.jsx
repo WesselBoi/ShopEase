@@ -14,7 +14,6 @@ function ProductDetails() {
 
   // Determine the maximum selectable quantity
   const maxQty = product && product.countinstock && product.countinstock < 10 ? product.countinstock : 10;
-
   const addToCartHandler = () => {
     dispatch(addToCart({...product, qty: quantity}))
     navigate("/cart");
@@ -71,7 +70,7 @@ function ProductDetails() {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-96 lg:h-full object-cover"
+                  className="w-full h-96 lg:h-full object-contain"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>
