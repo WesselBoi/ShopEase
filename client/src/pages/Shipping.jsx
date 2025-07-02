@@ -94,6 +94,16 @@ function Shipping() {
     }
   };
 
+  function handleAddDemoAddress() {
+    setFormData({
+      address: '123 Demo Street',
+      city: 'Demo City',
+      postalCode: '12345',
+      country: 'India'
+    });
+    setErrors({});
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg py-12 px-4">
       <div className="max-w-2xl mx-auto">
@@ -135,6 +145,9 @@ function Shipping() {
                 Delivering to: <span className="font-medium">{userInfo?.name}</span>
               </p>
             </div>
+          </div>
+          <div className='text-right'>
+            <button className='p-2 bg-cyan-100 bg-cover cursor-pointer hover:underline rounded-xl' onClick={() => handleAddDemoAddress()}>Use demo address</button>
           </div>
 
           {/* Error Display */}

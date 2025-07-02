@@ -60,13 +60,20 @@ function Login() {
     }
   };
 
+  function handleAddDemoCredentials() {
+    setFormData({
+      email: "testing@email.com",
+      password: "Testing"
+    })
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <h1 className="text-4xl font-bold text-goldish mb-2">
-              Premium Store
+              ShopEase
             </h1>
             <p className="text-white opacity-75">Welcome back!</p>
           </Link>
@@ -78,6 +85,7 @@ function Login() {
             <p className="text-mediumBlue">
               Enter your credentials to access your account
             </p>
+            <button className="ml-[50%] mt-2  cursor-pointer p-2 hover:underline bg-cyan-100 rounded-xl" onClick={() => handleAddDemoCredentials()}>Use demo account?</button>
           </div>
 
           {error && (

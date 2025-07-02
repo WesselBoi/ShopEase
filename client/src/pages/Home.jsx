@@ -14,7 +14,7 @@ function Home() {
         <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-goldish leading-tight">
             Welcome to
-            <span className="block text-white">Premium Store</span>
+            <span className="block text-white">ShopEase</span>
           </h1>
           <p className="text-xl md:text-xl mb-8 text-white max-w-3xl mx-auto leading-relaxed">
             Discover amazing products with unbeatable quality and prices. Your

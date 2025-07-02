@@ -57,7 +57,7 @@ function Header() {
                     to="/profile"
                     className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
                   >
-                    Welcome, {userInfo.name}!
+                    Profile ( {userInfo.name} ) 
                   </Link>
                   <LogoutButton />
                 </div>

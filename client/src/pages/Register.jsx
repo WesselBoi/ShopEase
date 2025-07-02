@@ -14,7 +14,6 @@ function Register() {
   const navigate = useNavigate();
 
   const { isAuthenticated } = useSelector((state) => state.auth)
-  console.log(isAuthenticated)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -74,8 +73,9 @@ function Register() {
       return
     }
 
+    console.log(formData);
+
     try {
-      // Keep your existing Redux logic
       const userData = await register({
         name: formData.name,
         email: formData.email,
@@ -96,7 +96,7 @@ function Register() {
         {/* Logo/Brand */}
         <div className='text-center mb-8'>
           <Link to='/' className='inline-block'>
-            <h1 className='text-4xl font-bold text-goldish mb-2'>Premium Store</h1>
+            <h1 className='text-4xl font-bold text-goldish mb-2'>ShopEase</h1>
             <p className='text-white opacity-75'>Create your account</p>
           </Link>
         </div>
