@@ -25,10 +25,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     //When user logs in successfully
-    setCredentials: (state, action) => {
+    setLoginCredentials: (state, action) => {
       state.userInfo = action.payload; //Save user info in state
       state.isAuthenticated = true; //Mark as logged in
       localStorage.setItem("userInfo", JSON.stringify(action.payload)); //Save user info in localStorage
+    },
+
+    //When user registers successfully
+    setRegisterCredentials: (state, action) => {
+      state.userInfo = action.payload;
     },
 
     //When user logs out
@@ -42,7 +47,7 @@ const authSlice = createSlice({
 });
 
 // Export actions (the commands you can send)
-export const { setCredentials, logout } = authSlice.actions;
+export const { setLoginCredentials , setRegisterCredentials , logout } = authSlice.actions;
 
 // Export reducer (the worker that processes commands)
 export default authSlice.reducer;

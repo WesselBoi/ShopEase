@@ -2,7 +2,7 @@ import React, { useState , useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../slices/authApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import { setRegisterCredentials } from "../slices/authSlice";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -82,7 +82,7 @@ function Register() {
         password: formData.password
       }).unwrap();
 
-      dispatch(setCredentials(userData));
+      dispatch(setRegisterCredentials(userData));
 
       navigate("/login");
     } catch (err) {

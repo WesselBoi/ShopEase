@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCredentials } from '../slices/authSlice';
+import { setLoginCredentials } from '../slices/authSlice';
 
 export const useAuthPersist = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const useAuthPersist = () => {
           const parsedUserInfo = JSON.parse(userInfo);
           // Validate that the user info has required fields
           if (parsedUserInfo && parsedUserInfo.userId) {
-            dispatch(setCredentials(parsedUserInfo));
+            dispatch(setLoginCredentials(parsedUserInfo));
           } else {
             // Clean up invalid data
             localStorage.removeItem('userInfo');

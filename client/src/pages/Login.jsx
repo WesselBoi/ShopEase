@@ -2,7 +2,7 @@ import React, { useState , useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../slices/authApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import { setLoginCredentials } from "../slices/authSlice";
 import { useLocation } from "react-router-dom";
 
 function Login() {
@@ -52,7 +52,7 @@ function Login() {
     try {
       const userData = await login(formData).unwrap(); // unwrap() is used to get the data from the mutation response
 
-      dispatch(setCredentials(userData)); // setCredentials is an action that sets the user data in the auth slice and dispatch is used to send the action to the store
+      dispatch(setLoginCredentials(userData)); // setCredentials is an action that sets the user data in the auth slice and dispatch is used to send the action to the store
 
       navigate("/");
     } catch (err) {
