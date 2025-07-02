@@ -1,5 +1,4 @@
-export const BASE_URL = import.meta.env.MODE === "development"
-  ? "http://localhost:8000" : "";
+export const BASE_URL = "https://shopease-backend-fvi1.onrender.com";
 
 export const PRODUCTS_URL = "/api/products";
 export const USERS_URL = "/api/auth";
