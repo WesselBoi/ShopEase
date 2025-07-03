@@ -11,19 +11,16 @@ A modern, full-featured E-Commerce application built using the **MERN** stack:
 ### 👤 User
 - User registration & login (with hashed passwords & JWT tokens)
 - Secure authentication with cookies
-- Update user profile & shipping info
 - Product search, filtering, and details
 - Add to cart & checkout flow
 
 ### 🛍️ Product
 - Product listing & details
-- Categories & filtering
 - Admin panel for managing products
 
 ### 💳 Order
 - Place orders
 - View past orders
-- Admin panel for order status updates
 
 ### 🧰 Tech Stack
 #### Frontend
@@ -39,8 +36,4 @@ A modern, full-featured E-Commerce application built using the **MERN** stack:
 - `bcryptjs` for password hashing
 - `cookie-parser` for managing auth tokens
 - `dotenv`, `cors`, `colors`, etc. for utilities
-
----
-
-## 📁 Folder Structure
 
