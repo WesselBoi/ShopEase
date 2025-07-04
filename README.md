@@ -35,5 +35,5 @@ A modern, full-featured E-Commerce application built using the **MERN** stack:
 - `MongoDB` with `Mongoose`
 - `bcryptjs` for password hashing
 - `cookie-parser` for managing auth tokens
-- `dotenv`, `cors`, `colors`, etc. for utilities
+- `dotenv`, `cors`, etc. for utilities
 
