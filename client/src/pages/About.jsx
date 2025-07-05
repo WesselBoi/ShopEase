@@ -367,7 +367,7 @@ function About() {
               Browse Products
             </Link>
             <a 
-              href='https://github.com/your-github/shopease' 
+              href='https://github.com/WesselBoi/ShopEase' 
               target='_blank'
               rel='noopener noreferrer'
               className='px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-full hover:bg-white hover:text-lightPurple transition-all duration-300 transform hover:scale-105'
