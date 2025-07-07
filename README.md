@@ -1,4 +1,6 @@
 # 🛒 MERN E-Commerce App
+[![My Skills](https://skillicons.dev/icons?i=js,react,tailwind,nodejs,redux,express,mongo,github,postman)](https://skillicons.dev)
+
 
 A modern, full-featured E-Commerce application built using the **MERN** stack:
 - **MongoDB** for database
@@ -28,7 +30,6 @@ A modern, full-featured E-Commerce application built using the **MERN** stack:
 - `Redux Toolkit` for state management
 - `TailwindCSS` for UI styling
 - `Framer Motion` for animations
-- `Three.js` for possible 3D visual elements
 
 #### Backend
 - `Express 5` with `Node.js`
