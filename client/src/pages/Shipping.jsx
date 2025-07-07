@@ -127,7 +127,7 @@ function Shipping() {
               </span>
             </div>
             <span className="font-bold text-lightPurple">
-              ${cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)}
+              ₹{cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)}
             </span>
           </div>
         </div>
