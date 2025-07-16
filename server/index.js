@@ -3,6 +3,7 @@ const cors = require("cors");
 const productsRouter = require("./routes/products");
 const authRouter = require("./routes/auth");
 const orderRouter = require("./routes/order");
+const stripeRouter = require('./routes/stripe');
 const connectToMongoDB = require("./connection");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const dotenv = require("dotenv");
@@ -13,7 +14,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://shopease-ealb.onrender.com",
+    origin: ["https://shopease-ealb.onrender.com" , "http://localhost:5173"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE" , "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
@@ -36,6 +37,7 @@ app.get("/", (_, res) => {
 app.use("/api/products", productsRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/stripe", stripeRouter);
 
 app.use(notFound);
 app.use(errorHandler);

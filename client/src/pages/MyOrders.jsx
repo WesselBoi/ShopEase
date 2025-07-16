@@ -15,6 +15,65 @@ function MyOrders() {
     }
   }, [userInfo, navigate]);
 
+  // Helper function to get payment status display
+  const getPaymentStatus = (order) => {
+    if (order.isPaid) {
+      return {
+        status: 'Paid',
+        color: 'text-green-600',
+        bgColor: 'bg-green-500',
+        text: `Paid on ${new Date(order.paidAt).toLocaleDateString()}`
+      };
+    } else if (order.paymentMethod === 'Cash on Delivery') {
+      return {
+        status: 'COD',
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-500',
+        text: 'Pay on delivery'
+      };
+    } else if (order.paymentMethod === 'Stripe') {
+      return {
+        status: 'Payment Failed',
+        color: 'text-red-600',
+        bgColor: 'bg-red-500',
+        text: 'Payment incomplete'
+      };
+    } else {
+      return {
+        status: 'Pending',
+        color: 'text-yellow-600',
+        bgColor: 'bg-yellow-500',
+        text: 'Payment pending'
+      };
+    }
+  };
+
+  // Helper function to get delivery status
+  const getDeliveryStatus = (order) => {
+    if (order.isDelivered) {
+      return {
+        status: 'Delivered',
+        color: 'text-green-600',
+        bgColor: 'bg-green-500',
+        text: `Delivered on ${new Date(order.deliveredAt).toLocaleDateString()}`
+      };
+    } else if (order.isPaid || order.paymentMethod === 'Cash on Delivery') {
+      return {
+        status: 'Processing',
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-500',
+        text: 'Being processed'
+      };
+    } else {
+      return {
+        status: 'Waiting',
+        color: 'text-gray-600',
+        bgColor: 'bg-gray-400',
+        text: 'Waiting for payment'
+      };
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center">
@@ -86,15 +145,19 @@ function MyOrders() {
           </div>
 
           <div className="bg-gray-300 rounded-2xl shadow-lg p-6 text-center">
-            <div className="flex justify-center text-3xl text-green-600 mb-2"><SquareCheckBig className="text-cyan-700" /></div>
+            <div className="flex justify-center text-3xl text-green-600 mb-2">
+              <SquareCheckBig className="text-cyan-700" />
+            </div>
             <h3 className="text-2xl font-bold text-darkerBg">
-              {myOrders?.filter((order) => order.isPaid)?.length || 0}
+              {myOrders?.filter((order) => order.isPaid || order.paymentMethod === 'Cash on Delivery')?.length || 0}
             </h3>
-            <p className="text-gray-600">Paid Orders</p>
+            <p className="text-gray-600">Ready to Ship</p>
           </div>
 
           <div className="bg-gray-300 rounded-2xl shadow-lg p-6 text-center">
-            <div className="flex justify-center text-3xl text-blue-600 mb-2"><TruckElectric className="text-cyan-700" /></div>
+            <div className="flex justify-center text-3xl text-blue-600 mb-2">
+              <TruckElectric className="text-cyan-700" />
+            </div>
             <h3 className="text-2xl font-bold text-darkerBg">
               {myOrders?.filter((order) => order.isDelivered)?.length || 0}
             </h3>
@@ -136,152 +199,130 @@ function MyOrders() {
           </div>
         ) : (
           <div className="space-y-6">
-            {myOrders.map((order) => (
-              <div
-                key={order._id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden"
-              >
-                {/* Order Header */}
-                <div className="bg-gradient-to-r from-lightPurple to-mediumBlue p-6 text-white">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold mb-2">
-                        Order #{order._id.slice(-8).toUpperCase()}
-                      </h3>
-                      <p className="opacity-90">
-                        Placed on{" "}
-                        {new Date(order.createdAt).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </p>
-                    </div>
-                    <div className="mt-4 md:mt-0 text-right">
-                      <div className="text-2xl font-bold">
-                        ₹{order.totalPrice}
-                      </div>
-                      <div className="text-sm opacity-90">
-                        {order.orderItems?.length || 0} item
-                        {(order.orderItems?.length || 0) !== 1 ? "s" : ""}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            {myOrders.map((order) => {
+              const paymentStatus = getPaymentStatus(order);
+              const deliveryStatus = getDeliveryStatus(order);
 
-                {/* Order Status */}
-                <div className="p-6 border-b border-gray-200 bg-gray-300">
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {/* Payment Status */}
-                    <div className="flex items-center">
-                      <div
-                        className={`w-4 h-4 rounded-full mr-3 ${
-                          order.isPaid ? "bg-green-500" : "bg-yellow-500"
-                        }`}
-                      ></div>
+              return (
+                <div
+                  key={order._id}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden"
+                >
+                  {/* Order Header */}
+                  <div className="bg-gradient-to-r from-lightPurple to-mediumBlue p-6 text-white">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                       <div>
-                        <div className="font-semibold text-darkerBg">
-                          Payment
-                        </div>
-                        <div
-                          className={`text-sm ${
-                            order.isPaid ? "text-green-600" : "text-yellow-600"
-                          }`}
-                        >
-                          {order.isPaid
-                            ? `Paid on ${new Date(
-                                order.paidAt
-                              ).toLocaleDateString()}`
-                            : "Pending"}
-                        </div>
+                        <h3 className="text-xl font-bold mb-2">
+                          Order #{order._id.slice(-8).toUpperCase()}
+                        </h3>
+                        <p className="opacity-90">
+                          Placed on{" "}
+                          {new Date(order.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </p>
                       </div>
-                    </div>
-
-                    {/* Delivery Status */}
-                    <div className="flex items-center">
-                      <div
-                        className={`w-4 h-4 rounded-full mr-3 ${
-                          order.isDelivered ? "bg-green-500" : "bg-gray-400"
-                        }`}
-                      ></div>
-                      <div>
-                        <div className="font-semibold text-darkerBg">
-                          Delivery
+                      <div className="mt-4 md:mt-0 text-right">
+                        <div className="text-2xl font-bold">
+                          ₹{order.totalPrice}
                         </div>
-                        <div
-                          className={`text-sm ${
-                            order.isDelivered
-                              ? "text-green-600"
-                              : "text-gray-600"
-                          }`}
-                        >
-                          {order.isDelivered
-                            ? `Delivered on ${new Date(
-                                order.deliveredAt
-                              ).toLocaleDateString()}`
-                            : "Processing"}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Payment Method */}
-                    <div className="flex items-center">
-                      <div className="w-4 h-4 bg-blue-500 rounded-full mr-3"></div>
-                      <div>
-                        <div className="font-semibold text-darkerBg">
-                          Payment Method
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          {order.paymentMethod}
+                        <div className="text-sm opacity-90">
+                          {order.orderItems?.length || 0} item
+                          {(order.orderItems?.length || 0) !== 1 ? "s" : ""}
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Order Items Preview */}
-                <div className="p-6 bg-gray-300">
-                  <h4 className="font-bold text-darkerBg mb-4">Order Items</h4>
-                  <div className="space-y-3">
-                    {order.orderItems?.slice(0, 3).map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between"
-                      >
-                        <div className="flex items-center">
-                          <div className="w-12 h-12 mr-4">
-                            <img
-                              src={item.image}
-                              alt={item.name}
-                              className="w-full h-full object-cover rounded-lg"
-                            />
-                          </div>
-                          <div>
-                            <div className="font-medium text-darkerBg">
-                              {item.name}
-                            </div>
-                            <div className="text-sm text-gray-600">
-                              Qty: {item.qty}
-                            </div>
+                  {/* Order Status */}
+                  <div className="p-6 border-b border-gray-200 bg-gray-300">
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {/* Payment Status */}
+                      <div className="flex items-center">
+                        <div className={`w-4 h-4 rounded-full mr-3 ${paymentStatus.bgColor}`}></div>
+                        <div>
+                          <div className="font-semibold text-darkerBg">Payment</div>
+                          <div className={`text-sm ${paymentStatus.color}`}>
+                            {paymentStatus.text}
                           </div>
                         </div>
-                        <div className="font-semibold text-darkerBg">
-                          ₹{(item.price * item.qty).toFixed(2)}
+                      </div>
+
+                      {/* Delivery Status */}
+                      <div className="flex items-center">
+                        <div className={`w-4 h-4 rounded-full mr-3 ${deliveryStatus.bgColor}`}></div>
+                        <div>
+                          <div className="font-semibold text-darkerBg">Delivery</div>
+                          <div className={`text-sm ${deliveryStatus.color}`}>
+                            {deliveryStatus.text}
+                          </div>
                         </div>
                       </div>
-                    ))}
 
-                    {(order.orderItems?.length || 0) > 3 && (
-                      <div className="text-center text-gray-500 text-sm">
-                        and {(order.orderItems?.length || 0) - 3} more item
-                        {(order.orderItems?.length || 0) - 3 !== 1 ? "s" : ""}
-                        ...
+                      {/* Payment Method */}
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 bg-blue-500 rounded-full mr-3"></div>
+                        <div>
+                          <div className="font-semibold text-darkerBg">Payment Method</div>
+                          <div className="text-sm text-gray-600">
+                            {order.paymentMethod}
+                            {order.paymentResult?.id && (
+                              <div className="text-xs text-green-600">
+                                ID: {order.paymentResult.id.slice(-8)}
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    )}
+                    </div>
+                  </div>
+
+                  {/* Order Items Preview */}
+                  <div className="p-6 bg-gray-300">
+                    <h4 className="font-bold text-darkerBg mb-4">Order Items</h4>
+                    <div className="space-y-3">
+                      {order.orderItems?.slice(0, 3).map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between"
+                        >
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 mr-4">
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-cover rounded-lg"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-medium text-darkerBg">
+                                {item.name}
+                              </div>
+                              <div className="text-sm text-gray-600">
+                                Qty: {item.qty}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="font-semibold text-darkerBg">
+                            ₹{(item.price * item.qty).toFixed(2)}
+                          </div>
+                        </div>
+                      ))}
+
+                      {(order.orderItems?.length || 0) > 3 && (
+                        <div className="text-center text-gray-500 text-sm">
+                          and {(order.orderItems?.length || 0) - 3} more item
+                          {(order.orderItems?.length || 0) - 3 !== 1 ? "s" : ""}
+                          ...
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

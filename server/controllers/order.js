@@ -12,6 +12,7 @@ const createOrder = async (req, res) => {
       taxPrice,
       shippingPrice,
       totalPrice,
+      paymentResult, 
     } = req.body;
 
     if (!orderItems || !Array.isArray(orderItems) || orderItems.length === 0) {
@@ -24,7 +25,6 @@ const createOrder = async (req, res) => {
 
     // Verify all products exist and have sufficient stock
     for (let item of orderItems) {
-
       if (!item._id) {
         return res.status(400).json({ error: "Product ID is required for all items" });
       }
@@ -47,6 +47,9 @@ const createOrder = async (req, res) => {
       }
     }
 
+    const isPaid = paymentMethod === 'Stripe' && paymentResult ? true : false;
+    const paidAt = isPaid ? new Date() : undefined;
+
     const order = await Order.create({
       user: req.user._id,
       orderItems: orderItems.map((item) => ({
@@ -63,10 +66,13 @@ const createOrder = async (req, res) => {
         country: shippingAddress.country,
       },
       paymentMethod,
+      paymentResult: paymentResult || {},
       itemsPrice: Number(itemsPrice),
       taxPrice: Number(taxPrice),
       shippingPrice: Number(shippingPrice),
       totalPrice: Number(totalPrice),
+      isPaid, 
+      paidAt, 
     });
 
     // Update product stock
@@ -75,6 +81,8 @@ const createOrder = async (req, res) => {
         $inc: { countinstock: -item.qty },
       });
     }
+
+    console.log(`Order created: ${order._id}, isPaid: ${isPaid}, paymentMethod: ${paymentMethod}`);
 
     // Return the created order
     res.status(201).json(order);

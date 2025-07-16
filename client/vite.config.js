@@ -8,4 +8,8 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     react()],
+    optimizeDeps: {
+      include: ['@stripe/stripe-js', '@stripe/react-stripe-js'],
+      force: true 
+    }
 })

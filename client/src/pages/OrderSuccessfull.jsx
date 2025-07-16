@@ -8,14 +8,11 @@ function OrderSuccessfull() {
   const [orderInfo, setOrderInfo] = useState(null);
 
   useEffect(() => {
-    // Check if user came from a valid order placement
-    const { orderId, orderData } = location.state || {};
+    const { orderId, orderData, paymentId } = location.state || {};
     
-    // Also check sessionStorage for additional validation
     const recentOrderId = sessionStorage.getItem('recentOrderId');
     const orderTimestamp = sessionStorage.getItem('orderTimestamp');
     
-    // Validate access conditions
     const hasValidLocationState = orderId && orderData;
     const hasRecentOrder = recentOrderId && orderTimestamp;
     const isRecentOrder = orderTimestamp && (Date.now() - parseInt(orderTimestamp)) < 300000; // 5 minutes
@@ -24,32 +21,33 @@ function OrderSuccessfull() {
       setIsValidAccess(true);
       setOrderInfo({
         orderId: orderId || recentOrderId,
-        orderData: orderData || JSON.parse(sessionStorage.getItem('recentOrderData') || '{}')
+        orderData: orderData || JSON.parse(sessionStorage.getItem('recentOrderData') || '{}'),
+        paymentId: paymentId || sessionStorage.getItem('recentPaymentId')
       });
       
-      // Store order info for this session (in case of page refresh)
       if (orderId && orderData) {
         sessionStorage.setItem('recentOrderId', orderId);
         sessionStorage.setItem('recentOrderData', JSON.stringify(orderData));
         sessionStorage.setItem('orderTimestamp', Date.now().toString());
+        if (paymentId) {
+          sessionStorage.setItem('recentPaymentId', paymentId);
+        }
       }
       
-      // Clear the session storage after 5 minutes
       setTimeout(() => {
         sessionStorage.removeItem('recentOrderId');
         sessionStorage.removeItem('recentOrderData');
         sessionStorage.removeItem('orderTimestamp');
+        sessionStorage.removeItem('recentPaymentId');
       }, 300000);
       
     } else {
-      // Invalid access - redirect to home after a brief delay
       setTimeout(() => {
         navigate('/', { replace: true });
       }, 2000);
     }
   }, [location.state, navigate]);
 
-  // Show loading/redirect message for invalid access
   if (!isValidAccess) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center py-12 px-4">
@@ -91,7 +89,30 @@ function OrderSuccessfull() {
     );
   }
 
-  const { orderId, orderData } = orderInfo || {};
+  const { orderId, orderData, paymentId } = orderInfo || {};
+
+  const getOrderStatus = () => {
+    if (!orderData) return { payment: 'Unknown', shipping: 'Unknown' };
+
+    if (orderData.paymentMethod === 'Stripe' && paymentId) {
+      return {
+        payment: { status: 'Paid', color: 'green', bg: 'bg-green-50', border: 'border-green-200' },
+        shipping: { status: 'Processing', color: 'blue', bg: 'bg-blue-50', border: 'border-blue-200' }
+      };
+    } else if (orderData.paymentMethod === 'Cash on Delivery') {
+      return {
+        payment: { status: 'Pay on Delivery', color: 'blue', bg: 'bg-blue-50', border: 'border-blue-200' },
+        shipping: { status: 'Processing', color: 'blue', bg: 'bg-blue-50', border: 'border-blue-200' }
+      };
+    } else {
+      return {
+        payment: { status: 'Pending', color: 'yellow', bg: 'bg-yellow-50', border: 'border-yellow-200' },
+        shipping: { status: 'Waiting for Payment', color: 'gray', bg: 'bg-gray-50', border: 'border-gray-200' }
+      };
+    }
+  };
+
+  const orderStatus = getOrderStatus();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purpleBg to-darkerBg flex items-center justify-center py-12 px-4">
@@ -133,8 +154,13 @@ function OrderSuccessfull() {
                 Order ID: <span className="font-mono text-lightPurple">{orderId}</span>
               </p>
             )}
+            {paymentId && (
+              <p className="text-gray-600 text-sm">
+                Payment ID: <span className="font-mono text-green-600">{paymentId.slice(-8)}</span>
+              </p>
+            )}
             <p className="text-sm text-gray-500 mt-2">
-              Placed on: {new Date().toLocaleDateString()} at {new Date().toLocaleTimeString()}
+              Placed on: {new Date().toLocaleDateString()}
             </p>
           </div>
 
@@ -147,11 +173,7 @@ function OrderSuccessfull() {
               <ul className="space-y-2 text-gray-700">
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-lightPurple rounded-full mr-3"></span>
-                  Order confirmation email sent
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-lightPurple rounded-full mr-3"></span>
-                  Processing will begin shortly
+                  {orderStatus.payment.status === 'Paid' ? 'Payment confirmed' : 'Processing payment'}
                 </li>
                 <li className="flex items-center">
                   <span className="w-2 h-2 bg-lightPurple rounded-full mr-3"></span>
@@ -166,13 +188,17 @@ function OrderSuccessfull() {
                 Order Status
               </h3>
               <div className="space-y-2">
-                <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                  <span className="text-yellow-800">Payment</span>
-                  <span className="text-yellow-700 font-medium">Pending</span>
+                <div className={`flex items-center justify-between p-3 rounded-lg border ${orderStatus.payment.bg} ${orderStatus.payment.border}`}>
+                  <span className={`text-${orderStatus.payment.color}-800`}>Payment</span>
+                  <span className={`text-${orderStatus.payment.color}-700 font-medium`}>
+                    {orderStatus.payment.status}
+                  </span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <span className="text-gray-800">Shipping</span>
-                  <span className="text-gray-600 font-medium">Processing</span>
+                <div className={`flex items-center justify-between p-3 rounded-lg border ${orderStatus.shipping.bg} ${orderStatus.shipping.border}`}>
+                  <span className={`text-${orderStatus.shipping.color}-800`}>Shipping</span>
+                  <span className={`text-${orderStatus.shipping.color}-700 font-medium`}>
+                    {orderStatus.shipping.status}
+                  </span>
                 </div>
               </div>
             </div>
@@ -202,11 +228,31 @@ function OrderSuccessfull() {
                   <span>₹{orderData.taxPrice}</span>
                 </div>
               </div>
+
+              {/* Payment Method Info */}
+              <div className="mt-4 pt-4 border-t">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-gray-600">Payment Method:</span>
+                  <span className="font-medium">{orderData.paymentMethod}</span>
+                </div>
+                {orderData.paymentMethod === 'Stripe' && paymentId && (
+                  <div className="mt-2 p-3 bg-green-50 rounded-lg border border-green-200">
+                    <div className="flex items-center text-green-700">
+                      <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm font-medium">Payment Successful</span>
+                    </div>
+                    <p className="text-xs text-green-600 mt-1">
+                      Your payment has been processed securely via Stripe
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/myorders"
@@ -229,7 +275,6 @@ function OrderSuccessfull() {
           </Link>
         </div>
 
-        {/* Security Notice */}
         <div className="mt-6 text-white opacity-60 text-xs">
           ⚠️ This page is only accessible immediately after order placement for security reasons
         </div>
