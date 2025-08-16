@@ -23,6 +23,7 @@ A modern, full-featured E-Commerce application built using the **MERN** stack:
 ### 💳 Order
 - Place orders
 - View past orders
+- Stripe integration for card payments
 
 ### 🧰 Tech Stack
 #### Frontend
