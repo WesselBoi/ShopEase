@@ -293,9 +293,9 @@ function About() {
               </p>
             </div>
 
-            {/* Payment Gateway (Coming Soon) */}
-            <div className='bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 opacity-75'>
-              <div className='w-16 h-16 bg-gray-400 rounded-full flex items-center justify-center mx-auto mb-6'>
+            {/* Payment Gateway */}
+            <div className='bg-white rounded-2xl p-8 shadow-lg text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2'>
+              <div className='w-16 h-16 bg-lightPurple rounded-full flex items-center justify-center mx-auto mb-6'>
                 <svg className='w-8 h-8 text-white' fill='currentColor' viewBox='0 0 20 20'>
                   <path d='M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z'></path>
                   <path fillRule='evenodd' d='M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z' clipRule='evenodd'></path>
@@ -303,11 +303,8 @@ function About() {
               </div>
               <h3 className='text-xl font-bold mb-4 text-darkerBg'>Payment Gateway</h3>
               <p className='text-mediumBlue leading-relaxed text-sm'>
-                Secure payment processing integration coming soon to complete the e-commerce experience.
+                Secure payment processing integration to complete the e-commerce experience.
               </p>
-              <span className='inline-block mt-2 px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full'>
-                Coming Soon
-              </span>
             </div>
           </div>
         </div>
