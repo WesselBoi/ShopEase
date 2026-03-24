@@ -2,7 +2,14 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 module.exports = async (req, res, next) => {
-  const token = req.cookies?.token; //check for token
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+  const bearerToken =
+    typeof authHeader === "string" && authHeader.startsWith("Bearer ")
+      ? authHeader.slice(7)
+      : null;
+
+  const token = req.cookies?.token || bearerToken;
+
   if (!token) {
     return res.status(401).json({ error: "Not authorized , no token" });
   }
@@ -19,7 +26,7 @@ module.exports = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error("Auth middleware error : ", error);
+    console.error("Auth middleware error : ", err);
     return res.status(401).json({ error: "Not authorized, token failed" });
   }
 };

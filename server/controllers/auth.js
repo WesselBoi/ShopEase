@@ -2,6 +2,18 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
+const getCookieOptions = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+
+  return {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: "/",
+  };
+};
+
 async function handleRegister(req, res) {
   if (!req.body.name || !req.body.email || !req.body.password) {
     return res.status(400).json({ error: "All fields are required" });
@@ -36,19 +48,17 @@ async function handleLogin(req, res) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // Changed for cross-origin
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      domain: process.env.NODE_ENV === "production" ? undefined : "localhost", // No domain for production
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
     });
+
+    res.cookie("token", token, getCookieOptions());
     res.status(200).json({
       message: "Login successful",
       userId: user._id,
       name: user.name,
       email: user.email,
+      token,
     });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -57,12 +67,7 @@ async function handleLogin(req, res) {
 
 async function HandleLogout(_, res) {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict", // Changed for cross-origin
-      domain: process.env.NODE_ENV === "production" ? undefined : "localhost",
-    });
+    res.clearCookie("token", getCookieOptions());
     res.status(200).json({ message: "Logout successful" });
   } catch (err) {
     res.status(500).json({ error: "Failed to logout" });

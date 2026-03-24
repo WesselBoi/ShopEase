@@ -12,9 +12,31 @@ dotenv.config();
 
 const app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
+const allowedOrigins = [
+  "https://shopease-ewbs.onrender.com",
+  "https://shopease-ealb.onrender.com",
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+];
+
 app.use(
   cors({
-    origin: ["https://shopease-ealb.onrender.com" , "http://localhost:5173"],
+    origin: (origin, callback) => {
+      // Allow non-browser or same-origin requests without an Origin header.
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE" , "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
