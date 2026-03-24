@@ -1,12 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-    --color-purpleBg: #222831;   
-    --color-goldish: #32E0C4;   
-    --color-darkerBg: #393E46;
-    --color-mediumBlue: #393E46;
-    --color-lightPurple: #393E46;
+    --color-purpleBg: #0b1020;
+    --color-goldish: #f97316;
+    --color-darkerBg: #131a2f;
+    --color-mediumBlue: #2563eb;
+    --color-lightPurple: #c15803;
 }
+
 :root {
-    font-family: Oxanium;
+    font-family: "Space Grotesk", sans-serif;
+    color-scheme: dark;
+}
+
+@layer base {
+    body {
+        background-color: #0b1020;
+        color: #f1f5f9;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-image:
+            radial-gradient(circle at 12% 18%, rgba(6, 182, 212, 0.17) 0, transparent 28%),
+            radial-gradient(circle at 88% 12%, rgba(249, 115, 22, 0.2) 0, transparent 24%),
+            radial-gradient(circle at 50% 96%, rgba(37, 99, 235, 0.18) 0, transparent 32%);
+        min-height: 100vh;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Sora", "Space Grotesk", sans-serif;
+        letter-spacing: -0.02em;
+    }
+
+    a,
+    button,
+    input,
+    select,
+    textarea {
+        transition-property: color, background-color, border-color, opacity, transform, box-shadow;
+        transition-duration: 220ms;
+        transition-timing-function: ease;
+    }
+
+    input,
+    select,
+    textarea {
+        --tw-ring-offset-color: #0b1020;
+    }
+
+    *::selection {
+        background: rgba(249, 115, 22, 0.35);
+        color: #fff;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(#06b6d4, #2563eb);
+        border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0b1020;
+    }
 }

@@ -285,15 +285,15 @@ function PlaceOrder() {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between">
                   <span className="text-gray-700">Items ({cart.cartItems.reduce((acc, item) => acc + item.qty, 0)})</span>
-                  <span className="font-semibold">₹{itemsPrice.toFixed(2)}</span>
+                  <span className="font-semibold text-black">₹{itemsPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-700">Shipping</span>
-                  <span className="font-semibold">₹{shippingPrice.toFixed(2)}</span>
+                  <span className="font-semibold text-black">₹{shippingPrice.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-700">Tax (18%)</span>
-                  <span className="font-semibold">₹{taxPrice.toFixed(2)}</span>
+                  <span className="font-semibold text-black">₹{taxPrice.toFixed(2)}</span>
                 </div>
                 <hr className="border-gray-300" />
                 <div className="flex justify-between text-xl">

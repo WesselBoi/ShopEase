@@ -28,7 +28,7 @@ function Products() {
           <h1 className="text-5xl font-bold mb-6 text-goldish">
             Our Premium Collection
           </h1>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-white">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-slate-200">
             Discover our amazing collection of products carefully selected just
             for you. Quality meets affordability in every item.
           </p>
@@ -41,7 +41,7 @@ function Products() {
               type="text"
               name="searchInput"
               placeholder="Search products..."
-              className="w-full px-4 py-3 pl-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-goldish focus:border-transparent"
+              className="w-full rounded-full border border-white/25 bg-white/10 px-4 py-3 pl-12 text-white placeholder-slate-300/70 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-goldish focus:border-transparent"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
@@ -95,7 +95,7 @@ function Products() {
               <Link
                 to={`/product/${product._id}`}
                 key={product._id}
-                className="flex flex-col rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group bg-white border-2 border-gray-200 hover:border-goldish"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-goldish hover:shadow-2xl"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -106,7 +106,7 @@ function Products() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 bg-darkerBg"></div>
                 </div>
 
-                <div className="flex flex-col flex-grow p-6 bg-gray-300">
+                <div className="flex flex-col flex-grow bg-slate-100 p-6">
                   <h2 className="text-xl font-bold mb-3 line-clamp-2 transition-colors duration-200 group-hover:opacity-80 text-darkerBg">
                     {product.name}
                   </h2>
@@ -123,7 +123,7 @@ function Products() {
                   </div>
 
                   <div className="flex items-center justify-center mt-auto">
-                    <span className="text-2xl font-bold text-lightPurple">
+                    <span className="text-2xl font-bold text-mediumBlue">
                       ₹{product.price}
                     </span>
                   </div>

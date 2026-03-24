@@ -132,7 +132,7 @@ function Register() {
                   name='name'
                   value={formData.name}
                   onChange={handleChange}
-                  className='w-full px-4 py-3 pl-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200'
+                  className='w-full px-4 py-3 pl-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black'
                   placeholder='Enter your full name'
                   required
                 />
@@ -156,7 +156,7 @@ function Register() {
                   name='email'
                   value={formData.email}
                   onChange={handleChange}
-                  className='w-full px-4 py-3 pl-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200'
+                  className='w-full px-4 py-3 pl-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black'
                   placeholder='Enter your email'
                   required
                 />
@@ -181,7 +181,7 @@ function Register() {
                   name='password'
                   value={formData.password}
                   onChange={handleChange}
-                  className='w-full px-4 py-3 pl-11 pr-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200'
+                  className='w-full px-4 py-3 pl-11 pr-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black'
                   placeholder='Create a password'
                   required
                 />
@@ -206,7 +206,6 @@ function Register() {
               </div>
             </div>
 
-            {/* Confirm Password Field (Optional) */}
             <div>
               <label htmlFor='confirmPassword' className='block text-sm font-medium text-darkerBg mb-2'>
                 Confirm Password <span className='text-gray-400'>(Optional)</span>
@@ -218,7 +217,7 @@ function Register() {
                   name='confirmPassword'
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className='w-full px-4 py-3 pl-11 pr-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200'
+                  className='w-full px-4 py-3 pl-11 pr-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black'
                   placeholder='Confirm your password'
                 />
                 <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>

@@ -10,7 +10,7 @@ function Header() {
   const { cartItems } = useSelector((state) => state.cart);
 
   return (
-    <header className="shadow-lg border-b-2 border-goldish bg-darkerBg sticky top-0 z-50">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-darkerBg/90 shadow-xl backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
@@ -18,7 +18,7 @@ function Header() {
           <div className="flex-shrink-0">
             <Link
               to="/"
-              className="text-xl sm:text-2xl font-bold hover:opacity-80 transition-opacity duration-200 text-goldish"
+              className="text-xl sm:text-2xl font-bold tracking-tight text-goldish hover:opacity-85"
             >
               ShopEase
             </Link>
@@ -28,19 +28,19 @@ function Header() {
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               to="/"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+              className="px-3 py-2 rounded-md text-sm font-medium text-slate-100/90 hover:text-goldish"
             >
               Home
             </Link>
             <Link
               to="/products"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+              className="px-3 py-2 rounded-md text-sm font-medium text-slate-100/90 hover:text-goldish"
             >
               Products
             </Link>
             <Link
               to="/about"
-              className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+              className="px-3 py-2 rounded-md text-sm font-medium text-slate-100/90 hover:text-goldish"
             >
               About
             </Link>
@@ -55,7 +55,7 @@ function Header() {
                 <div className="flex items-center space-x-3">
                   <Link 
                     to="/profile"
-                    className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-100/90 hover:text-goldish"
                   >
                     Profile ( {userInfo.name} ) 
                   </Link>
@@ -65,13 +65,13 @@ function Header() {
                 <div className="flex items-center space-x-3">
                   <Link
                     to="/login"
-                    className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-slate-100/90 hover:text-goldish"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
-                    className="px-3 py-2 bg-goldish text-darkerBg rounded-md text-sm font-medium transition-all duration-200 hover:opacity-90"
+                    className="rounded-full bg-goldish px-4 py-2 text-sm font-semibold text-darkerBg shadow-lg shadow-goldish/20 hover:opacity-90"
                   >
                     Register
                   </Link>
@@ -83,7 +83,7 @@ function Header() {
             <div className="relative">
               <Link
                 to="/cart"
-                className="text-xl sm:text-2xl cursor-pointer hover:scale-110 transition-transform duration-200 text-goldish"
+                className="text-xl sm:text-2xl cursor-pointer text-slate-100 hover:scale-110 hover:text-goldish"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -103,7 +103,7 @@ function Header() {
                 </svg>
               </Link>
               {cartItems?.length > 0 && (
-                <span className="absolute -top-2 -right-2 text-darkerBg text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold bg-goldish border border-darkerBg">
+                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full border border-darkerBg bg-goldish text-xs font-bold text-darkerBg">
                   {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                 </span>
               )}
@@ -111,7 +111,7 @@ function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-md transition-all duration-200 hover:opacity-80 text-goldish"
+              className="md:hidden rounded-md p-2 text-slate-100 hover:bg-white/10 hover:text-goldish"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
@@ -142,37 +142,37 @@ function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-goldish/30 py-4">
+          <div className="md:hidden border-t border-white/10 py-4">
             <div className="flex flex-col space-y-2">
               <Link
                 to="/"
-                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                className="px-3 py-2 rounded-md text-sm font-medium text-slate-100 hover:text-goldish"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/products"
-                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                className="px-3 py-2 rounded-md text-sm font-medium text-slate-100 hover:text-goldish"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Products
               </Link>
               <Link
                 to="/about"
-                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                className="px-3 py-2 rounded-md text-sm font-medium text-slate-100 hover:text-goldish"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               
               {/* Mobile Auth Section */}
-              <div className="border-t border-goldish/30 pt-3 mt-2">
+              <div className="mt-2 border-t border-white/10 pt-3">
                 {isAuthenticated ? (
                   <div className="space-y-2">
                     <Link 
                       to="/profile"
-                      className="block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                      className="block px-3 py-2 rounded-md text-sm font-medium text-slate-100 hover:text-goldish"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Profile ({userInfo.name})
@@ -185,14 +185,14 @@ function Header() {
                   <div className="space-y-2">
                     <Link
                       to="/login"
-                      className="block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:text-cyan-600 text-goldish"
+                      className="block px-3 py-2 rounded-md text-sm font-medium text-slate-100 hover:text-goldish"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       to="/register"
-                      className="block px-3 py-2 bg-goldish text-darkerBg rounded-md text-sm font-medium transition-all duration-200 hover:opacity-90 mx-3"
+                      className="mx-3 block rounded-full bg-goldish px-3 py-2 text-sm font-semibold text-darkerBg hover:opacity-90"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Register

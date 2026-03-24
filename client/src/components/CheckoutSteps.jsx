@@ -47,8 +47,8 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
               <div className={`
                 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
                 ${step.active 
-                  ? 'bg-lightPurple text-white shadow-lg' 
-                  : 'bg-gray-300 text-gray-600'
+                  ? 'bg-gradient-to-br from-lightPurple to-mediumBlue text-white shadow-lg shadow-lightPurple/30' 
+                  : 'bg-white/10 text-slate-300 border border-white/15 backdrop-blur-sm'
                 }
               `}>
                 {step.active ? step.icon : step.number}
@@ -58,8 +58,8 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
               <span className={`
                 mt-2 text-sm font-medium transition-all duration-300
                 ${step.active 
-                  ? 'text-lightPurple' 
-                  : 'text-gray-500'
+                  ? 'text-goldish' 
+                  : 'text-slate-400'
                 }
               `}>
                 {step.name}
@@ -71,8 +71,8 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
               <div className={`
                 w-16 h-1 mx-4 transition-all duration-300
                 ${steps[index + 1].active 
-                  ? 'bg-lightPurple' 
-                  : 'bg-gray-300'
+                  ? 'bg-gradient-to-r from-lightPurple to-mediumBlue' 
+                  : 'bg-white/20'
                 }
               `} />
             )}

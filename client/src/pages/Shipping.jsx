@@ -122,7 +122,7 @@ function Shipping() {
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-2xl mr-2">🛒</span>
-              <span className="font-medium">
+              <span className="font-medium text-black">
                 {cartItems.reduce((acc, item) => acc + item.qty, 0)} items in cart
               </span>
             </div>
@@ -147,7 +147,7 @@ function Shipping() {
             </div>
           </div>
           <div className='text-right'>
-            <button className='p-2 bg-cyan-100 bg-cover cursor-pointer hover:underline rounded-xl' onClick={() => handleAddDemoAddress()}>Use demo address</button>
+            <button className='cursor-pointer rounded-full border border-lightPurple/40 bg-lightPurple/10 px-4 py-2 text-sm text-mediumBlue hover:border-goldish hover:text-darkerBg' onClick={() => handleAddDemoAddress()}>Use demo address</button>
           </div>
 
           {/* Error Display */}
@@ -170,7 +170,7 @@ function Shipping() {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
+                className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 text-black ${
                   errors.address 
                     ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                     : 'border-gray-300 focus:ring-lightPurple focus:border-lightPurple'
@@ -196,7 +196,7 @@ function Shipping() {
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
+                  className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 text-black ${
                     errors.city 
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                       : 'border-gray-300 focus:ring-lightPurple focus:border-lightPurple'
@@ -219,7 +219,7 @@ function Shipping() {
                   name="postalCode"
                   value={formData.postalCode}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
+                  className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 text-black ${
                     errors.postalCode 
                       ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                       : 'border-gray-300 focus:ring-lightPurple focus:border-lightPurple'
@@ -242,7 +242,7 @@ function Shipping() {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 ${
+                className={`w-full px-4 py-3 border rounded-lg transition-all duration-200 text-black ${
                   errors.country 
                     ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                     : 'border-gray-300 focus:ring-lightPurple focus:border-lightPurple'

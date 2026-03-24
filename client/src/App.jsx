@@ -25,7 +25,8 @@ function App() {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="relative min-h-screen overflow-x-hidden">
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_15%_15%,rgba(249,115,22,0.14),transparent_28%),radial-gradient(circle_at_85%_10%,rgba(6,182,212,0.14),transparent_24%),radial-gradient(circle_at_50%_95%,rgba(37,99,235,0.16),transparent_30%)]" />
       <Header />
       <ScrollToTop />         {/* Scroll to top functionality */}
       
@@ -49,9 +50,9 @@ function App() {
             element={
               <PageTransition>
                 <div className="min-h-screen flex items-center justify-center bg-purpleBg">
-                  <div className="text-center">
+                  <div className="text-center rounded-3xl border border-white/10 bg-white/5 px-10 py-12 backdrop-blur-xl">
                     <h1 className="text-4xl font-bold text-goldish mb-4">404</h1>
-                    <p className="text-white text-xl">Page Not Found</p>
+                    <p className="text-slate-200 text-xl">Page Not Found</p>
                   </div>
                 </div>
               </PageTransition>

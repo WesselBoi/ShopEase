@@ -122,7 +122,7 @@ function Cart() {
                             onChange={(e) =>
                               addToCartHandler(item, Number(e.target.value))
                             }
-                            className="border-2 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg"
+                            className="border-2 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg text-black"
                           >
                             {[...Array(10)].map((_, i) => (
                               <option key={i + 1} value={i + 1}>

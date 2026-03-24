@@ -26,7 +26,7 @@ function ProductDetails() {
         <div className="mb-8">
           <Link
             to="/products"
-            className="inline-flex items-center px-6 py-3 rounded-lg text-white font-medium transition-all duration-200 hover:opacity-90 hover:scale-105 bg-mediumBlue"
+            className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3 font-medium text-white backdrop-blur-sm transition-all duration-200 hover:border-goldish hover:text-goldish"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -76,7 +76,7 @@ function ProductDetails() {
               </div>
 
               {/* Product Info Section */}
-              <div className="p-8 lg:p-12 space-y-6 bg-gray-300">
+              <div className="space-y-6 bg-slate-100 p-8 lg:p-12">
                 <div>
                   <h1 className="text-4xl font-bold mb-4 text-darkerBg">
                     {product.name}
@@ -119,7 +119,7 @@ function ProductDetails() {
                     <select
                       value={quantity}
                       onChange={(e) => setQuantity(Number(e.target.value))}
-                      className="border-2 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg cursor-pointer disabled:cursor-not-allowed"
+                      className="border-2 rounded-lg px-4 py-3 text-lg focus:outline-none focus:ring-2 transition-all duration-200 border-mediumBlue focus:ring-purpleBg cursor-pointer disabled:cursor-not-allowed text-black"
                       disabled={!product.countinstock}
                     >
                       {[...Array(maxQty)].map((_, i) => (
@@ -134,8 +134,8 @@ function ProductDetails() {
                     <button
                       className={
                         product.countinstock
-                          ? "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold transition-all duration-200 hover:opacity-90 hover:scale-105 shadow-lg bg-mediumBlue cursor-pointer"
-                          : "flex-1 text-white py-4 px-8 rounded-lg text-lg font-semibold  shadow-lg bg-gray-400 cursor-not-allowed"
+                          ? "flex-1 cursor-pointer rounded-xl bg-gradient-to-r from-lightPurple to-mediumBlue px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 hover:scale-105"
+                          : "flex-1 cursor-not-allowed rounded-xl bg-gray-400 px-8 py-4 text-lg font-semibold text-white shadow-lg"
                       }
                       onClick={addToCartHandler}
                       disabled={!product.countinstock}

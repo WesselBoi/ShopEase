@@ -85,7 +85,7 @@ function Login() {
             <p className="text-mediumBlue">
               Enter your credentials to access your account
             </p>
-            <button className="ml-[50%] mt-2  cursor-pointer p-2 hover:underline bg-cyan-100 rounded-xl" onClick={() => handleAddDemoCredentials()}>Use demo account?</button>
+            <button className="mt-3 cursor-pointer rounded-full border border-lightPurple/40 bg-lightPurple/10 px-4 py-2 text-sm text-mediumBlue hover:border-goldish hover:text-darkerBg" onClick={() => handleAddDemoCredentials()}>Use demo account?</button>
           </div>
 
           {error && (
@@ -122,7 +122,7 @@ function Login() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 pl-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 pl-11 border border-black rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black"
                   placeholder="Enter your email"
                   required
                 />
@@ -153,7 +153,7 @@ function Login() {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 pl-11 pr-11 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 pl-11 pr-11 border border-black rounded-lg focus:ring-2 focus:ring-lightPurple focus:border-transparent transition-all duration-200 text-black"
                   placeholder="Enter your password"
                   required
                 />

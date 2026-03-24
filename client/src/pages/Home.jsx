@@ -9,8 +9,10 @@ function Home() {
   return (
     <div className="min-h-screen bg-purpleBg">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-purpleBg to-darkerBg">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
+      <section className="relative flex h-screen items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_20%_18%,rgba(6,182,212,0.24),transparent_32%),radial-gradient(circle_at_82%_20%,rgba(249,115,22,0.22),transparent_30%),linear-gradient(140deg,#0b1020_0%,#131a2f_56%,#0b1020_100%)]">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute -left-20 top-20 h-64 w-64 rounded-full bg-lightPurple/20 blur-3xl" />
+        <div className="absolute -right-16 bottom-16 h-72 w-72 rounded-full bg-goldish/15 blur-3xl" />
         <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-goldish leading-tight">
             Welcome to
@@ -23,13 +25,13 @@ function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/products"
-              className="px-8 py-4 bg-goldish text-darkerBg font-bold text-lg rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="rounded-full bg-goldish px-8 py-4 text-lg font-bold text-darkerBg shadow-lg shadow-goldish/25 transition-all duration-300 hover:-translate-y-1 hover:opacity-90"
             >
               Shop Now
             </Link>
             <Link
               to="/products"
-              className="px-8 py-4 border-2 border-white text-white font-bold text-lg rounded-full hover:bg-white hover:text-darkerBg transition-all duration-300 transform hover:scale-105"
+              className="rounded-full border border-white/50 bg-white/10 px-8 py-4 text-lg font-bold text-white backdrop-blur-md transition-all duration-300 hover:border-white hover:bg-white hover:text-darkerBg"
             >
               Browse Collection
             </Link>
@@ -39,7 +41,7 @@ function Home() {
 
       {/* Featured Products Section */}
       {!isLoading && featuredProducts.length > 0 && (
-        <section className="py-20 px-4 bg-gradient-to-br from-darkerBg to-purpleBg">
+        <section className="bg-gradient-to-b from-darkerBg/90 to-purpleBg py-20 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-6 text-goldish">
@@ -56,7 +58,7 @@ function Home() {
                 <Link
                   to={`/product/${product._id}`}
                   key={product._id}
-                  className="flex flex-col bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                 >
                   <div className="relative overflow-hidden">
                     <img
@@ -66,11 +68,11 @@ function Home() {
                     />
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                   </div>
-                  <div className="flex flex-col flex-grow px-6 py-4 bg-gray-300">
+                  <div className="flex flex-col flex-grow bg-slate-100 px-6 py-4">
                     <h3 className="text-lg font-bold mb-2 text-darkerBg line-clamp-2 flex-grow">
                       {product.name}
                     </h3>
-                    <p className="text-2xl font-bold text-lightPurple mt-auto">
+                    <p className="mt-auto text-2xl font-bold text-mediumBlue">
                       ₹{product.price}
                     </p>
                   </div>
@@ -81,7 +83,7 @@ function Home() {
             <div className="text-center mt-12">
               <Link
                 to="/products"
-                className="inline-block px-8 py-4 bg-goldish text-darkerBg font-bold text-lg rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="inline-block rounded-full bg-goldish px-8 py-4 text-lg font-bold text-darkerBg shadow-lg shadow-goldish/25 transition-all duration-300 hover:-translate-y-1 hover:opacity-90"
               >
                 View All Products
               </Link>
@@ -91,7 +93,7 @@ function Home() {
       )}
 
       {/* Call to Action Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-lightPurple to-mediumBlue">
+      <section className="bg-[linear-gradient(120deg,#06b6d4_0%,#2563eb_65%,#1d4ed8_100%)] py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6 text-white">
             Ready to Start Shopping?
@@ -102,7 +104,7 @@ function Home() {
           </p>
           <Link
             to="/products"
-            className="inline-block px-10 py-5 bg-white text-lightPurple font-bold text-xl rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="inline-block rounded-full bg-white px-10 py-5 text-xl font-bold text-mediumBlue shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-slate-100"
           >
             Start Shopping Now
           </Link>
