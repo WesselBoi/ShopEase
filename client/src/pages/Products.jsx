@@ -75,6 +75,7 @@ function Products() {
             <div className="text-center">
               <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-goldish mx-auto mb-4"></div>
               <h2 className="text-2xl text-white font-semibold">Loading Products</h2>
+              <h6 className="text-white font-semibold">First load may be slow — server waking up</h6>
             </div>
           </div>
         ) : isError ? (
